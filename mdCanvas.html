@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <style type="text/css">
+	/*<![CDATA[*/
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		outline: 0;
+		font-weight: inherit;
+		font-style: inherit;
+		font-size: 100%;
+		font-family: inherit;
+		vertical-align: baseline;
+	}
+	/* remember to define focus styles! */
+	:focus {
+		outline: 0;
+	}
+	body {
+		line-height: 1;
+		color: black;
+		background: white;
+	}
+	ol, ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	/* tables still need 'cellspacing="0"' in the markup */
+	table {
+		border-collapse: separate;
+		border-spacing: 0;
+	}
+	caption, th, td {
+		text-align: left;
+		font-weight: normal;
+	}
+	blockquote:before, blockquote:after,
+	q:before, q:after {
+		content: "";
+	}
+	blockquote, q {
+		quotes: "" "";
+	}
+	html {
+		width: 100%;
+		height: 100%;
+		
+		font-size: 16px;
+	}
+	
+	body {
+		width: inherit;
+		height: inherit;
+		
+		font-family: "Helvetica Neue", "Helvetica", Arial sans-serif;
+		line-height: 1.5;
+		
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		}
+		
+	h1 {
+		font-size: 2.5em;
+		line-height: 1.5;
+		}
+		
+	h3 {
+		font-size: 1.5em;
+		font-weight: 600;
+	}
+	
+	ul, ol {
+		margin: 1em;
+		}
+		ul li {
+			list-style: outside disc;
+			padding: 0 0.5em 0;
+			}
+		
+		ol li {
+			list-style-type: decimal;
+			}
+	
+    .flex {
+        /* basic styling */
+        width: 100%;
+        height: 400px;
+        border: 1px solid #555;
+        font: 14px Arial;
+
+        /* flexbox setup */
+        display: flex;
+		min-height: 50%;
+    }
+
+    .flex > div[id] {
+        flex: 1 1 auto;
+		padding: 1em;
+        width: 30px; /* To make the transition work nicely. (Transitions to/from
+                        "width:auto" are buggy in Gecko and Webkit, at least.
+                        See http://bugzil.la/731886 for more info.) */
+        /* transition: width 0.7s ease-out; */
+    }
+		.flex > div > div {
+			padding: 1em;
+			}
+
+    .flex > div:hover {
+        /* width: 200px; */
+    }
+
+    #mdc-problem { background: #9ff;  }
+    #mdc-solution { background: #c9f; height: 200px;  }
+    #mdc-key-metrics { background: #c0c0c0; height: 200px;  }
+    #mdc-unique-value-proposition { background: #cc9;  }
+    #mdc-unfair-advantage { background: #c9f; height: 200px;  }
+    #mdc-channels { background: #c0c0c0; height: 200px;  }
+    #mdc-customer-segment { background: #9ff;  }
+    #mdc-cost-structure { background: #f60;  }
+    #mdc-revenue-stream { background: #0f0;  }
+   
+  /*]]>*/
+    </style> 
+  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="mdCanvas.js"></script>
+  	<script src="https://cdn.rawgit.com/showdownjs/showdown/1.4.2/dist/showdown.min.js"></script>
+  </head>
+  <body>
+    <h1 id="mdc-canvas">LeanCanvas</h1>
+    <div class="flex">
+      <div id="mdc-problem">problem</div>
+      <div>
+		  <div id="mdc-solution">solution</div>
+		  <div id="mdc-key-metrics">key metrics</div>
+	  </div>
+      <div id="mdc-unique-value-proposition">unique-value-proposition</div>
+      <div>
+		  <div id="mdc-unfair-advantage">unfair advantage</div>
+		  <div id="mdc-channels">channels</div>
+	  </div>
+	  <div id="mdc-customer-segment">customer-segment</div>
+    </div>
+    <div class="flex">
+      <div id="mdc-cost-structure">cost-structure</div>
+      <div id="mdc-revenue-stream">revenue-stream</div>
+    </div>
+	
+	<script type="text/javascript" charset="utf-8">
+
+	// generate sections for the canvas
+	function doSections( md ) { 
+		var result = md.split( "#" );
+		var sections = {  };
+		// console.log( result );
+		$.each( result, function( key, value ) { 
+			if ( value != "" ) {  
+				//console.log( key + ": " + value );
+
+				// get the heading
+				var header = value.split( "\n" );
+				//console.log( key + ":" +header[0] );
+
+				// add header to the section
+				sections[objKey( header[0] )] = '###' + value;
+
+				// get the name of the canvas or project name
+				if ( header[0].includes( "anvas" ) ) { 
+					sections[objKey( header[0] )] = header[1];
+				}
+			}
+		} );
+		return sections;
+	}
+
+	// generate object key
+	function objKey( name ) { 
+		return 'mdc-' + name.toLowerCase().trim();
+	}
+
+	// process the markdown content
+	function showmd( value ) { 
+		var sections = doSections( value );
+		// console.log( sections );
+
+		$.each( sections, function( key, value ) { 
+			console.log( key + ": " + value );
+			var tagId = "#" + key;
+			
+			var sdown = new showdown.Converter(  ), text = value, html = sdown.makeHtml( text );
+			$( tagId ).html( html );
+		});
+	}
+
+	// get url parameter
+	var md = getUrlParameter( "md" ) || "mdCanvas";
+	var pathmd = md + ".md";
+
+	// get markdown file and content
+	$.get( pathmd, function( data ) {
+		showmd( data );
+	}, 'text');
+
+	</script>
+  </body>
+</html>	
