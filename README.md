@@ -48,5 +48,5 @@ Create a markdown textfile `project.md` in the same directory as the `mdCanvas.h
 	- Goodlike status
 
 ### Open mdCanvas.html with your markdown textfile
-URL: /path/to/your/mdCanvas.html?md=project
+URL: `/path/to/your/mdCanvas.html?md=project`
 
