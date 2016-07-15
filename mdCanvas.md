@@ -23,12 +23,6 @@ Lean Canvas
 - Path to the customer
 - Social media
 - Point of sale
-- Social media
-- Point of sale
-- Social media
-- Point of sale
-- Social media
-- Point of sale
 
 # Cost-Structure
 - Customer aquisition costs

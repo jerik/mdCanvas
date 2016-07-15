@@ -61,12 +61,14 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		}
+
+		padding: 3px 3px 3px 3px; 
+	}
 		
 	h1 {
 		font-size: 2.5em;
 		line-height: 1.5;
-		}
+	}
 		
 	h3 {
 		font-size: 1.5em;
@@ -75,20 +77,21 @@
 	
 	ul, ol {
 		margin: 1em;
-		}
-		ul li {
-			list-style: outside disc;
-			padding: 0 0.5em 0;
-			}
-		
-		ol li {
-			list-style-type: decimal;
-			}
+	}
+
+	ul li {
+		list-style: outside disc;
+		padding: 0 0.5em 0;
+	}
+	
+	ol li {
+		list-style-type: decimal;
+	}
 	
     .flex {
         /* basic styling */
         width: 100%;
-        height: 400px;
+        height: 200px;
         border: 1px solid #555;
         font: 14px Arial;
 
@@ -104,25 +107,32 @@
                         "width:auto" are buggy in Gecko and Webkit, at least.
                         See http://bugzil.la/731886 for more info.) */
         /* transition: width 0.7s ease-out; */
+		border: 1px solid black;
     }
-		.flex > div > div {
-			padding: 1em;
-			}
+	.flex > div > div {
+		padding: 1em;
+		border: 1px solid black;
+	}
 
     .flex > div:hover {
         /* width: 200px; */
     }
 
-    #mdc-problem { background: #9ff;  }
-    #mdc-solution { background: #c9f; height: 200px;  }
-    #mdc-key-metrics { background: #c0c0c0; height: 200px;  }
-    #mdc-unique-value-proposition { background: #cc9;  }
-    #mdc-unfair-advantage { background: #c9f; height: 200px;  }
-    #mdc-channels { background: #c0c0c0; height: 200px;  }
-    #mdc-customer-segment { background: #9ff;  }
-    #mdc-cost-structure { background: #f60;  }
-    #mdc-revenue-stream { background: #0f0;  }
+	.box { 
+		width: 19%;
+		border: 1px solid black;
+	}
    
+    #mdc-problem {  }
+    #mdc-solution { height: 44%;  }
+    #mdc-key-metrics {  height: 45%;  }
+    #mdc-unique-value-proposition {  }
+    #mdc-unfair-advantage {  height: 44%;  }
+    #mdc-channels {  height: 45%;  }
+    #mdc-customer-segment {   }
+    #mdc-cost-structure {   }
+    #mdc-revenue-stream {   }
+
   /*]]>*/
     </style> 
   	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -133,12 +143,12 @@
     <h1 id="mdc-canvas">LeanCanvas</h1>
     <div class="flex">
       <div id="mdc-problem">problem</div>
-      <div>
+      <div class="box">
 		  <div id="mdc-solution">solution</div>
 		  <div id="mdc-key-metrics">key metrics</div>
 	  </div>
       <div id="mdc-unique-value-proposition">unique-value-proposition</div>
-      <div>
+      <div class="box">
 		  <div id="mdc-unfair-advantage">unfair advantage</div>
 		  <div id="mdc-channels">channels</div>
 	  </div>
