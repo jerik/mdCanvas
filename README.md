@@ -1,6 +1,9 @@
 # mdCanvas
 Create a Lean Canvas out of a markdown list 
 
+## Examples
+[Rendered lean canvas]( https://jerik.github.io/mdCanvas/mdCanvas.html ) based on this markdown file: [mdCanvas.md]( https://raw.githubusercontent.com/jerik/mdCanvas/master/mdCanvas.md )
+
 ## Getting started
 1. Clone or download this git repository 
 1. Edit `mdCanvas.md`
