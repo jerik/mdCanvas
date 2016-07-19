@@ -53,3 +53,6 @@ Create a markdown textfile `project.md` in the same directory as the `mdCanvas.h
 ### Open mdCanvas.html with your markdown textfile
 URL: `/path/to/your/mdCanvas.html?md=project`
 
+## Todos
+- Check https://github.com/theInspiredOnes/bmc-generator, perhaps a better
+  layout?
