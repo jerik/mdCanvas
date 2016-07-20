@@ -45,28 +45,23 @@
 		quotes: "" "";
 	}
 	html {
-		width: 100%; /* remove */
-		height: 100%; /* remove */
-		
 		font-size: 16px;
 	}
 	
 	body {
-		width: inherit;
-		height: inherit;
-		
+		width: 100%;
+		height: 100%;
 		font-family: "Helvetica Neue", "Helvetica", Arial sans-serif;
 		line-height: 1.5;
-		
-		/* changes in new class */
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-
-		padding: 3px 3px 3px 3px; 
-
-		box-sizing: border-box; /* added 20160720 */
 	}
+
+    .containerbox { 
+    	display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        padding: 10px;
+    }
 		
 	h1 {
 		font-size: 2.5em;
@@ -94,13 +89,13 @@
     .flex {
         /* basic styling */
         width: 100%;
-		height: 200px; /* auto */
+		height: auto; 
         border: 1px solid #555;
         font: 14px Arial;
 
         /* flexbox setup */
         display: flex;
-		min-height: 50%; /* 150px */
+		min-height: 150px%; 
     }
 
     .flex > div[id] {
@@ -111,12 +106,9 @@
     }
 	.flex > div > div {
 		padding: 1em;
-		/* border: 1px solid black; */ /* added 20160720 */
-		border-top: 1px solid black; /* added 20160720 */
-		box-sizing: border-box; /* added 20160720 */
-		/* 
-		flex: 1
-		*/
+		border: 1px solid black; 
+		/* border-top: 1px solid black; */
+		flex: 1;
 	}
 
     .flex > div:hover {
@@ -126,21 +118,19 @@
 	.box { 
 		width: 19%;
 		border: 1px solid black;
-		/*
         display: flex;
         flex-direction: column;
-		*/
 	}
    
-    #mdc-problem {  }
-    #mdc-solution { height: 44%;  } /* removed */
-    #mdc-key-metrics {  height: 45%;  } /* removed */
-    #mdc-unique-value-proposition {  }
-    #mdc-unfair-advantage {  height: 44%;  } /* removed */
-    #mdc-channels {  height: 45%;  } /* removed */
-    #mdc-customer-segment {   }
-    #mdc-cost-structure {   }
-    #mdc-revenue-stream {   }
+    #mdc-problem { }
+    #mdc-solution { } 
+    #mdc-key-metrics { }
+    #mdc-unique-value-proposition { }
+    #mdc-unfair-advantage { } 
+    #mdc-channels { } 
+    #mdc-customer-segment { }
+    #mdc-cost-structure { }
+    #mdc-revenue-stream { }
 
   /*]]>*/
     </style> 
@@ -149,6 +139,7 @@
   	<script src="https://cdn.rawgit.com/showdownjs/showdown/1.4.2/dist/showdown.min.js"></script>
   </head>
   <body>
+  <div class="containerbox">
     <h1 id="mdc-canvas">LeanCanvas</h1>
     <div class="flex">
       <div id="mdc-problem">problem</div>
@@ -167,6 +158,7 @@
       <div id="mdc-cost-structure">cost-structure</div>
       <div id="mdc-revenue-stream">revenue-stream</div>
     </div>
+  </div>
 	
 	<script type="text/javascript" charset="utf-8">
 
