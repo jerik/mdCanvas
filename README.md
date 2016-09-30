@@ -1,6 +1,9 @@
 # mdCanvas
 Create a Lean Canvas out of a markdown list 
 
+## Examples
+[Rendered lean canvas]( https://jerik.github.io/mdCanvas/mdCanvas.html ) based on this markdown file: [mdCanvas.md]( https://raw.githubusercontent.com/jerik/mdCanvas/master/mdCanvas.md )
+
 ## Getting started
 1. Clone or download this git repository 
 1. Edit `mdCanvas.md`
@@ -50,3 +53,6 @@ Create a markdown textfile `project.md` in the same directory as the `mdCanvas.h
 ### Open mdCanvas.html with your markdown textfile
 URL: `/path/to/your/mdCanvas.html?md=project`
 
+## Todos
+- Check https://github.com/theInspiredOnes/bmc-generator, perhaps a better
+  layout?
