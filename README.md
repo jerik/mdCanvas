@@ -54,5 +54,6 @@ Create a markdown textfile `project.md` in the same directory as the `mdCanvas.h
 URL: `/path/to/your/mdCanvas.html?md=project`
 
 ## Todos
-- Check https://github.com/theInspiredOnes/bmc-generator, perhaps a better
-  layout?
+- Create todo list under the mdCanvas, as I want to know my todos to finish the content of the canvas. Should be optional
+- Snapchat feature. Canvas is deleted after X (days?) Period of time
+- Secure Canvas, only available if you know the password. Password can be assigned to each canvas individually. (Drop.io features? misc url to access it, download it...)
