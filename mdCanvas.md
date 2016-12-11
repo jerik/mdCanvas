@@ -44,3 +44,7 @@ Lean Canvas
 # Unfair-advantage
 - C'ant be easily...
 - ... copied and bought
+
+# Todo
+- Verify problem by going out of the building
+- Talk to target customer
