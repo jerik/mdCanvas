@@ -50,10 +50,15 @@ Create a markdown textfile `project.md` in the same directory as the `mdCanvas.h
 	# Unfair-advantage
 	- Goodlike status
 
+
+### Optional todo list under the canvas
+If you add a todo section in your markdown textfile it will show up under the canvas. 
+
+	# Todo 
+	- This headline is optional. If not stated it will not show up
+
 ### Open mdCanvas.html with your markdown textfile
 URL: `/path/to/your/mdCanvas.html?md=project`
 
 ## Todos
-- Create todo list under the mdCanvas, as I want to know my todos to finish the content of the canvas. Should be optional
-- Snapchat feature. Canvas is deleted after X (days?) Period of time
-- Secure Canvas, only available if you know the password. Password can be assigned to each canvas individually. (Drop.io features? misc url to access it, download it...)
+- Make the todo section disapear when clicking on the headline. So that the canvas can be printed without todolist.
