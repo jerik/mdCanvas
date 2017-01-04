@@ -109,8 +109,9 @@
 		$.each( cleanFilenames, function( key, value ) { 
 			console.log( value );
 			var li = $( '<li>' ).appendTo( '#link' );
+			var name = value.slice( 0,-3 );
 			// $( '<a>', { text: value, href: '?md=' + value.slice( 0,-3 ) } ).appendTo( '#link' );
-			$( '<a>', { text: value, href: '?md=' + value.slice( 0,-3 ) } ).appendTo( li );
+			$( '<a>', { text: name, href: '?md=' + name } ).appendTo( li );
 		});
 	}( jQuery ));
 
