@@ -63,3 +63,5 @@ URL: `/path/to/your/mdCanvas.html?md=project`
 ## Todos
 - Make the todo section disapear when clicking on the headline. So that the canvas can be printed without todolist.
 - Add Colors. Automatic highlights of pairs. 
+- Link list has problems with filenames including spaces. They should be removed from list. Perhaps with Error-Message
+- Get hint, if a md file does not exists, but there is a link in the sidebar
