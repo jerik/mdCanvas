@@ -11,7 +11,7 @@
   </head>
   <body>
   <div id="sidebar">
-  <button onclick="toggleSidebar()">&laquo;</button>
+  <button id="toggler" onclick="toggleSidebar()">&laquo;</button>
 	  <ul id="link">
 	  </ul>
   </div>
@@ -102,7 +102,7 @@
 	(function($) {
 		
 		var filenames = g_FOLDER_CONTENTS.match(/\S+/g);
-		//console.log( filenames );
+		console.log( filenames );
 		var cleanFilenames = $.map( filenames, function( n ) { 
 			return( ( /readme/i ).test( n ) ? null : n );
 			} );
@@ -117,31 +117,20 @@
 	}( jQuery ));
 
 function toggleSidebar(  )	{ 
-	// smoketest code, to test toggle 
-	/* @todo replace with real sidebar toggle
+	/* 
 	 * 	real toggle is done with display: none ( on/off ) in the sidebar
 	 *  but need the sidbar small version to hold the button >>. Perhaps just remove the size of the sidebar and display:none for the ul element, which holds the link content
 	*/
-	var bgcolor = $( '#sidebar' ).css( 'background-color' );
-	// check if the rgb color has value 240, which is in aliceblue is rgb( 240, 248, 255 )
-	var has240 = bgcolor.indexOf(240); 
+
+	var widthpx = $( '#sidebar' ).css( 'width' );
+	var width = widthpx.slice( 0, widthpx.length - 2 );
+	width = Number( width );
 	
 	// switch between color aliceblue and red = rgb( 255,0,0 )
-	$( '#sidebar' ).css( 'background-color', 
-			( has240 > 0 ) ? 'red' : 'aliceblue'
+	$( '#sidebar' ).css( 'width', 
+			( width < 30 ) ? 200 : 29
 	) 
 }
-
-// toggle sidebar
-/*
-$( 'button' ).click( 
-	function(  ) { 
-		$( '#sidebar' ).css( 'background-color', 'red' )
-	}, function(  ) { 
-		$( '#sidebar' ).css( 'background-color', 'blue' )
-	}
-);
-*/
 
 	</script>
   </body>

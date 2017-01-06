@@ -154,3 +154,7 @@ code {
 	width: 10%; 
 	/* display: none; */
 }
+
+#toggler { 
+	width: 10px;
+}
