@@ -117,23 +117,31 @@
 	}( jQuery ));
 
 function toggleSidebar(  )	{ 
-	/* 
-	 * 	real toggle is done with display: none ( on/off ) in the sidebar
-	 *  but need the sidbar small version to hold the button >>. Perhaps just remove the size of the sidebar and display:none for the ul element, which holds the link content
-	*/
 
 	var widthpx = $( '#sidebar' ).css( 'width' );
 	var width = widthpx.slice( 0, widthpx.length - 2 );
 	width = Number( width );
 	
-	// switch between color aliceblue and red = rgb( 255,0,0 )
+	// resize sidebar
 	$( '#sidebar' ).css( 'width', 
 			( width < 30 ) ? 200 : 29
-	) 
+	);
+	
+	// hide/show sidebar links
 	$( '#link' ).css( 'display', 
 			( width < 30 ) ? 'inline' : 'none'
-	) 
+	);
+
+	// adapt containerbox size
+	// @todo resizing does not work. Nor bg-color...
+	var bgcolor = $( 'containerbox' ).css( 'background-color' );
+	console.log( bgcolor );
+	$( '#containerbox' ).css( 'background-color', 
+			( width < 30 ) ? 'red' : 'blue'
+	);
+	console.log( $( '#containerbox' ).css( 'background-color' ) );
 }
+
 
 
 	</script>
