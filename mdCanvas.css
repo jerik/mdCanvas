@@ -151,10 +151,15 @@ code {
 	background-color: aliceblue; 
 	height: 100%; 
 	float: left; 
-	width: 10%; 
+	width: 29px; 
 	/* display: none; */
 }
 
+/* button */
 #toggler { 
 	width: 10px;
+}
+
+# link { 
+	display: none;
 }
