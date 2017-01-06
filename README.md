@@ -66,3 +66,4 @@ URL: `/path/to/your/mdCanvas.html?md=project`
 - Link list has problems with filenames including spaces. They should be removed from list. Perhaps with Error-Message
 - Get hint, if a md file does not exists, but there is a link in the sidebar
 - Try simpel http server, to overcome the restriction, that I cannot read and save files with javascript!
+- Try https://github.com/niklasvh/html2canvas to create a image of the page, and then convert this to pdf for printing. Problem, screenshot should be done, after the md content is loaded.

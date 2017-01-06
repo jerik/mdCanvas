@@ -11,6 +11,7 @@
   </head>
   <body>
   <div id="sidebar">
+  <button onclick="toggleSidebar()">&laquo;</button>
 	  <ul id="link">
 	  </ul>
   </div>
@@ -114,6 +115,33 @@
 			$( '<a>', { text: name, href: '?md=' + name } ).appendTo( li );
 		});
 	}( jQuery ));
+
+function toggleSidebar(  )	{ 
+	// smoketest code, to test toggle 
+	/* @todo replace with real sidebar toggle
+	 * 	real toggle is done with display: none ( on/off ) in the sidebar
+	 *  but need the sidbar small version to hold the button >>. Perhaps just remove the size of the sidebar and display:none for the ul element, which holds the link content
+	*/
+	var bgcolor = $( '#sidebar' ).css( 'background-color' );
+	// check if the rgb color has value 240, which is in aliceblue is rgb( 240, 248, 255 )
+	var has240 = bgcolor.indexOf(240); 
+	
+	// switch between color aliceblue and red = rgb( 255,0,0 )
+	$( '#sidebar' ).css( 'background-color', 
+			( has240 > 0 ) ? 'red' : 'aliceblue'
+	) 
+}
+
+// toggle sidebar
+/*
+$( 'button' ).click( 
+	function(  ) { 
+		$( '#sidebar' ).css( 'background-color', 'red' )
+	}, function(  ) { 
+		$( '#sidebar' ).css( 'background-color', 'blue' )
+	}
+);
+*/
 
 	</script>
   </body>

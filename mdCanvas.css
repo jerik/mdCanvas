@@ -56,6 +56,8 @@ body {
     justify-content: space-between;
     height: 100%;
     padding: 10px;
+	float: left; 
+	width: 80%; 
 }
 	
 h1 {
@@ -144,3 +146,11 @@ code {
     font: 14px Arial;
 }
 
+/* Toggle Sidebar */
+#sidebar { 
+	background-color: aliceblue; 
+	height: 100%; 
+	float: left; 
+	width: 10%; 
+	/* display: none; */
+}
