@@ -116,33 +116,82 @@
 		});
 	}( jQuery ));
 
-function toggleSidebar(  )	{ 
-
-	var widthpx = $( '#sidebar' ).css( 'width' );
-	var width = widthpx.slice( 0, widthpx.length - 2 );
-	width = Number( width );
+	(function($) {
+	 	checkStatusSidebar(  );
+		
+		// @todo need a function to close the initial sidebar when loaded the fist time
+		
+	}( jQuery ));
 	
-	// resize sidebar
-	$( '#sidebar' ).css( 'width', 
-			( width < 30 ) ? 200 : 29
-	);
-	
-	// hide/show sidebar links
-	$( '#link' ).css( 'display', 
-			( width < 30 ) ? 'inline' : 'none'
-	);
 
-	// adapt containerbox size
-	// @todo resizing does not work. Nor bg-color...
-	var bgcolor = $( 'containerbox' ).css( 'background-color' );
-	console.log( bgcolor );
-	$( '#containerbox' ).css( 'background-color', 
-			( width < 30 ) ? 'red' : 'blue'
-	);
-	console.log( $( '#containerbox' ).css( 'background-color' ) );
-}
+	function toggleSidebar(  )	{ 
+		// @todo duplicated code, has to be removed and better solved
+		const stateFolded = 'folded';
+		const stateExpanded = 'expanded';
 
+		var widthpx = $( '#sidebar' ).css( 'width' );
+		var width = widthpx.slice( 0, widthpx.length - 2 );
+		width = Number( width );
 
+		//checkStatusSidebar(  );
+		
+		if ( width < 30 ) { 
+			$( '#sidebar' ).css( 'width', 200 );
+			$( '#link' ).css( 'display', 'inline');
+			setStatusSidebar( stateExpanded );
+		} else { 
+			$( '#sidebar' ).css( 'width', 29 );
+			$( '#link' ).css( 'display', 'none');
+			setStatusSidebar( stateFolded );
+		}
+
+		/*
+		// resize sidebar
+		$( '#sidebar' ).css( 'width', 
+				( width < 30 ) ? 200 : 29
+		);
+		
+		// hide/show sidebar links
+		$( '#link' ).css( 'display', 
+				( width < 30 ) ? 'inline' : 'none'
+		);
+		*/
+
+		// adapt containerbox size
+		// @todo resizing does not work. Nor bg-color...
+		var bgcolor = $( 'containerbox' ).css( 'background-color' );
+		console.log( bgcolor );
+		$( '#containerbox' ).css( 'background-color', 
+				( width < 30 ) ? 'red' : 'blue'
+		);
+		console.log( $( '#containerbox' ).css( 'background-color' ) );
+	}
+
+	function checkStatusSidebar(  ) { 
+		// @todo duplicated code, has to be removed and better solved
+		const stateFolded = 'folded';
+		const stateExpanded = 'expanded';
+
+		// check local storage
+		var currentState = localStorage.getItem( 'statusSidebar' );
+
+		if ( currentState === null ) { 
+			console.log( 'status of sidebar is not definied; so it shall be folded' );
+			currentState = stateFolded;
+		} 
+
+		console.log( currentState );
+		return currentState;
+	}
+
+	function setStatusSidebar( setState = 'folded' ) { 
+		// @todo duplicated code, has to be removed and better solved
+		const stateFolded = 'folded';
+		const stateExpanded = 'expanded';
+
+		localStorage.setItem( 'statusSidebar', ( setState == stateFolded ? stateFolded : stateExpanded ) );
+		console.log( 'statusSidebar is now: ' + setState )
+	}
 
 	</script>
   </body>
