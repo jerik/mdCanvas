@@ -12,7 +12,7 @@
   <body>
   <div id="sidebar">
   <button id="toggler" onclick="toggleSidebar()">&laquo;</button>
-	  <ul id="link">
+	  <ul id="link" style="display:none">
 	  </ul>
   </div>
   <div class="containerbox">
@@ -117,81 +117,68 @@
 	}( jQuery ));
 
 	(function($) {
-	 	checkStatusSidebar(  );
-		
-		// @todo need a function to close the initial sidebar when loaded the fist time
+	 	var sidebar = toggleSidebar(  );
+		sidebar.checkStatusSidebar(  );
+	 	//checkStatusSidebar(  );
 		
 	}( jQuery ));
 	
 
+	// Closure: http://javascriptissexy.com/understand-javascript-closures-with-ease/
 	function toggleSidebar(  )	{ 
-		// @todo duplicated code, has to be removed and better solved
-		const stateFolded = 'folded';
-		const stateExpanded = 'expanded';
+		const stateClose = 'close';
+		const stateOpen = 'open';
 
 		var widthpx = $( '#sidebar' ).css( 'width' );
 		var width = widthpx.slice( 0, widthpx.length - 2 );
 		width = Number( width );
 
-		//checkStatusSidebar(  );
-		
+		// This is run automatically and leads to the 
+		// sideeffect that a new opened canvas ( via URL ) has a open sidebar.
+		// @todo show sidebar with the currentState
+		// perhaps: always have it closed, only if the state is open, open the sidebar
 		if ( width < 30 ) { 
-			$( '#sidebar' ).css( 'width', 200 );
-			$( '#link' ).css( 'display', 'inline');
-			setStatusSidebar( stateExpanded );
+			openSidebar(  );
 		} else { 
-			$( '#sidebar' ).css( 'width', 29 );
-			$( '#link' ).css( 'display', 'none');
-			setStatusSidebar( stateFolded );
+			closeSidebar(  );
 		}
 
-		/*
-		// resize sidebar
-		$( '#sidebar' ).css( 'width', 
-				( width < 30 ) ? 200 : 29
-		);
-		
-		// hide/show sidebar links
-		$( '#link' ).css( 'display', 
-				( width < 30 ) ? 'inline' : 'none'
-		);
-		*/
+		function openSidebar(  ) { 
+			$( '#sidebar' ).css( 'width', 200 );
+			$( '#link' ).css( 'display', 'inline');
+			setStatusSidebar( stateOpen );
+		}
 
-		// adapt containerbox size
-		// @todo resizing does not work. Nor bg-color...
-		var bgcolor = $( 'containerbox' ).css( 'background-color' );
-		console.log( bgcolor );
-		$( '#containerbox' ).css( 'background-color', 
-				( width < 30 ) ? 'red' : 'blue'
-		);
-		console.log( $( '#containerbox' ).css( 'background-color' ) );
+		function closeSidebar(  ) { 
+			$( '#sidebar' ).css( 'width', 29 );
+			$( '#link' ).css( 'display', 'none');
+			setStatusSidebar( stateClose );
+		}
+
+		function setStatusSidebar( setState = 'folded' ) { 
+			localStorage.setItem( 'statusSidebar', ( setState == stateClose ? stateClose : stateOpen ) );
+			console.log( 'statusSidebar is now: ' + setState )
+		}
+
+		function checkStatusSidebar(  ) { 
+
+			// check local storage
+			var currentState = localStorage.getItem( 'statusSidebar' );
+
+			if ( currentState === null ) { 
+				console.log( 'status of sidebar is not definied; so it shall be folded' );
+				currentState = stateClose;
+			} else { 
+				console.log( 'status of sidebar is DEFINIED: ' + currentState );
+			} 
+
+			console.log( currentState );
+			return currentState;
+		}
+
 	}
 
-	function checkStatusSidebar(  ) { 
-		// @todo duplicated code, has to be removed and better solved
-		const stateFolded = 'folded';
-		const stateExpanded = 'expanded';
 
-		// check local storage
-		var currentState = localStorage.getItem( 'statusSidebar' );
-
-		if ( currentState === null ) { 
-			console.log( 'status of sidebar is not definied; so it shall be folded' );
-			currentState = stateFolded;
-		} 
-
-		console.log( currentState );
-		return currentState;
-	}
-
-	function setStatusSidebar( setState = 'folded' ) { 
-		// @todo duplicated code, has to be removed and better solved
-		const stateFolded = 'folded';
-		const stateExpanded = 'expanded';
-
-		localStorage.setItem( 'statusSidebar', ( setState == stateFolded ? stateFolded : stateExpanded ) );
-		console.log( 'statusSidebar is now: ' + setState )
-	}
 
 	</script>
   </body>
