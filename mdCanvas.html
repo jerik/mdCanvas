@@ -11,7 +11,7 @@
   </head>
   <body>
   <div id="sidebar">
-  <button id="toggler" onclick="toggleSidebar()">&laquo;</button>
+  <button id="toggler" onclick="">&laquo;</button>
 	  <ul id="link" style="display:none">
 	  </ul>
   </div>
@@ -117,15 +117,18 @@
 	}( jQuery ));
 
 	(function($) {
-	 	var sidebar = toggleSidebar(  );
-		sidebar.checkStatusSidebar(  );
-	 	//checkStatusSidebar(  );
+
+	$( '#sidebar' ).click( function(  ) {  
+		// @todo does not work: no access to sbar(  );
+		// var sidebar = sbar(  );
+		// sidebar.toggle(  );
+		console.log( "just been clicked" );
+	});
 		
-	}( jQuery ));
 	
 
 	// Closure: http://javascriptissexy.com/understand-javascript-closures-with-ease/
-	function toggleSidebar(  )	{ 
+	function sbar(  )	{ 
 		const stateClose = 'close';
 		const stateOpen = 'open';
 
@@ -133,22 +136,24 @@
 		var width = widthpx.slice( 0, widthpx.length - 2 );
 		width = Number( width );
 
-		// This is run automatically and leads to the 
-		// sideeffect that a new opened canvas ( via URL ) has a open sidebar.
-		// @todo show sidebar with the currentState
-		// perhaps: always have it closed, only if the state is open, open the sidebar
-		if ( width < 30 ) { 
-			openSidebar(  );
-		} else { 
-			closeSidebar(  );
+		// capsulated the toggle function, so that is not called every time sbar(  ) is called
+		function toggle(  ) {  
+			if ( width < 30 ) { 
+				openSidebar(  );
+			} else { 
+				closeSidebar(  );
+			}
 		}
 
+		// @todo rename to open(  )
+		// so that it can be called with sbar.open(  )
 		function openSidebar(  ) { 
 			$( '#sidebar' ).css( 'width', 200 );
 			$( '#link' ).css( 'display', 'inline');
 			setStatusSidebar( stateOpen );
 		}
 
+		// @todo rename to close(  )
 		function closeSidebar(  ) { 
 			$( '#sidebar' ).css( 'width', 29 );
 			$( '#link' ).css( 'display', 'none');
@@ -160,6 +165,7 @@
 			console.log( 'statusSidebar is now: ' + setState )
 		}
 
+		// @todo rename to checkStatus(  )
 		function checkStatusSidebar(  ) { 
 
 			// check local storage
@@ -177,6 +183,9 @@
 		}
 
 	}
+
+
+	}( jQuery ));
 
 
 
