@@ -116,6 +116,78 @@
 		});
 	}( jQuery ));
 
+
+	$( '#sidebar' ).click( function(  ) {  
+		console.log( "just been NEW clicked" );
+		var nsiba = new sideBarNew(  );
+		nsiba.toggle(  );
+
+		// @todo need a check when a new md is loaded how the state of the sidebar was
+	});
+
+	function sideBarNew(  )	{ 
+		const stateClose = 'close';
+		const stateOpen = 'open';
+
+		console.log( "I am a sidebar!" );
+
+		// @todo do I need this?
+		var widthpx = $( '#sidebar' ).css( 'width' );
+		var width = widthpx.slice( 0, widthpx.length - 2 );
+		width = Number( width );
+
+		// capsulated the toggle function, so that is not called every time sbar(  ) is called
+		/*
+		function toggle(  ) {  
+			if ( width < 30 ) { 
+				openSidebar(  );
+			} else { 
+				closeSidebar(  );
+			}
+		}
+		*/
+
+		return {  
+
+			open:  function(  ) { 
+			   $( '#sidebar' ).css( 'width', 200 );
+			   $( '#link' ).css( 'display', 'inline');
+			   this.setState( stateOpen );
+			},
+
+			close: function (  ) { 
+			   $( '#sidebar' ).css( 'width', 29 );
+			   $( '#link' ).css( 'display', 'none');
+			   this.setState( stateClose );
+		   	},
+
+			setState: function ( setState = 'folded' ) { 
+				localStorage.setItem( 'statusSidebar', ( setState == stateClose ? stateClose : stateOpen ) );
+				console.log( 'statusSidebar is now: ' + setState )
+			}, 
+			
+			getState: function(  ) {
+				return localStorage.getItem( 'statusSidebar' );
+		    },
+
+			toggle: function(  ) { 
+				if ( this.getState(  ) == stateOpen ) { 
+					this.close(  );
+				} else { 
+					this.open(  );
+				}
+			}
+
+
+
+
+		}
+
+	}
+
+	
+
+	/***** old code just commented to start new 
 	(function($) {
 
 	$( '#sidebar' ).click( function(  ) {  
@@ -186,6 +258,7 @@
 
 
 	}( jQuery ));
+	*****/
 
 
 
