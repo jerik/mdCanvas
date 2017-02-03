@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <title>testLocalStorage</title>
+	<link rel="stylesheet" href="mdCanvas.css" type="text/css" media="screen" charset="utf-8">
+  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="mdCanvas.js"></script>
+	<!--
+	<script src="mdfiles.js"></script>
+  	<script src="https://cdn.rawgit.com/showdownjs/showdown/1.4.2/dist/showdown.min.js"></script>
+	-->
+  </head>
+  <body>
+  <button id="sidebar">Foo</button><br>
+  <a href="testLocalStorage.html">link myself</a><br>
+  <a href="testLocalStorage.html">link myself?md=bar</a><br>
+	
+	<script type="text/javascript" charset="utf-8">
+
+	/****
+	 * code to get a list of all lean canvas and link them! 
+	 * does only work in the server context, not on the local file system
+	 * And locally with a workaround of a windows batch file
+	 * http://stackoverflow.com/a/23189786/1933185
+	 ***/ 
+
+	console.log( 'first lStorage:' );
+	console.log( localStorage  );
+	(function($) {
+		
+		// test localStorage
+		localStorage.setItem( 'foo', Date.now(  ) );
+
+		// open or close sidebar based on the localstorage
+		// ugly as I repeat myself, have to search later for a cleaner solution
+		const stateOpen = 'open';
+		console.log( 'initial load, stateSidebar is: ' + localStorage.getItem( 'stateSidebar' ) );
+		if ( localStorage.getItem( 'stateSidebar' ) == stateOpen ) { 
+				localStorage.setItem( 'stateSidebar', stateOpen );
+		}
+
+		console.log( 'second ( inside ) lStorage: ' + localStorage.toString()  );
+		console.log( localStorage  );
+	}( jQuery ));
+	console.log( 'third lStorage: ' );
+	console.log( localStorage  );
+
+
+	$( '#sidebar' ).click( function(  ) {  
+		console.log( "just been NEW clicked" );
+		var nsiba = new sideBarNew(  );
+		nsiba.toggle(  );
+	});
+
+	// Closure: http://javascriptissexy.com/understand-javascript-closures-with-ease/
+	function sideBarNew(  )	{ 
+		const stateClose = 'close'; 
+		const stateOpen = 'open';
+
+		console.log( "I am a sidebar!" );
+
+		return {  
+
+			open:  function(  ) { 
+			   this.setState( stateOpen );
+			},
+
+			close: function (  ) { 
+			   this.setState( stateClose );
+		   	},
+
+			setState: function ( setState = stateOpen ) { 
+				if ( setState == stateOpen ) {  
+					localStorage.setItem( 'stateSidebar', stateOpen );
+				} else {  
+					// this has the advantage that a new loaded page and a closed sidebar have the same state
+					localStorage.removeItem( 'stateSidebar' ); // value is null
+				}
+
+				// localStorage.setItem( 'stateSidebar', ( setState == stateClose ? stateClose : stateOpen ) );
+				console.log( 'stateSidebar is now: ' + this.getState(  ) );
+			}, 
+			
+			getState: function(  ) {
+				return localStorage.getItem( 'stateSidebar' );
+		    },
+
+			toggle: function(  ) { 
+				if ( this.getState(  ) == stateOpen ) { 
+					this.close(  );
+				} else { 
+					this.open(  );
+				}
+			}
+		}
+	}
+
+	</script>
+  </body>
+</html>	

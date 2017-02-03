@@ -99,6 +99,8 @@
 	 * http://stackoverflow.com/a/23189786/1933185
 	 ***/ 
 
+	console.log( 'first lStorage:' );
+	console.log( localStorage  );
 	(function($) {
 		
 		var filenames = g_FOLDER_CONTENTS.match(/\S+/g);
@@ -115,6 +117,9 @@
 			$( '<a>', { text: name, href: '?md=' + name } ).appendTo( li );
 		});
 
+		// test localStorage
+		localStorage.setItem( 'foo', Date.now(  ) );
+
 		// open or close sidebar based on the localstorage
 		// ugly as I repeat myself, have to search later for a cleaner solution
 		const stateOpen = 'open';
@@ -124,7 +129,12 @@
 			   	$( '#link' ).css( 'display', 'inline');
 				localStorage.setItem( 'stateSidebar', stateOpen );
 		}
+
+		console.log( 'second ( inside ) lStorage: ' + localStorage.toString()  );
+		console.log( localStorage  );
 	}( jQuery ));
+	console.log( 'third lStorage: ' );
+		console.log( localStorage  );
 
 
 	$( '#sidebar' ).click( function(  ) {  
