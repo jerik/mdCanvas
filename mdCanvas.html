@@ -96,8 +96,8 @@
 	 * code to get a list of all lean canvas and link them! 
 	 * does only work in the server context, not on the local file system
 	 * And locally with a workaround of a windows batch file
+	 * http://stackoverflow.com/a/23189786/1933185
 	 ***/ 
-	http://stackoverflow.com/a/23189786/1933185
 
 	(function($) {
 		
@@ -114,6 +114,16 @@
 			// $( '<a>', { text: value, href: '?md=' + value.slice( 0,-3 ) } ).appendTo( '#link' );
 			$( '<a>', { text: name, href: '?md=' + name } ).appendTo( li );
 		});
+
+		// open or close sidebar based on the localstorage
+		// ugly as I repeat myself, have to search later for a cleaner solution
+		const stateOpen = 'open';
+		console.log( 'initial load, stateSidebar is: ' + localStorage.getItem( 'stateSidebar' ) );
+		if ( localStorage.getItem( 'stateSidebar' ) == stateOpen ) { 
+			   	$( '#sidebar' ).css( 'width', 200 );
+			   	$( '#link' ).css( 'display', 'inline');
+				localStorage.setItem( 'stateSidebar', stateOpen );
+		}
 	}( jQuery ));
 
 
@@ -121,12 +131,11 @@
 		console.log( "just been NEW clicked" );
 		var nsiba = new sideBarNew(  );
 		nsiba.toggle(  );
-
-		// @todo need a check when a new md is loaded how the state of the sidebar was
 	});
 
+	// Closure: http://javascriptissexy.com/understand-javascript-closures-with-ease/
 	function sideBarNew(  )	{ 
-		const stateClose = 'close'; // should be key not available
+		const stateClose = 'close'; 
 		const stateOpen = 'open';
 
 		console.log( "I am a sidebar!" );
@@ -137,6 +146,7 @@
 		width = Number( width );
 
 		// capsulated the toggle function, so that is not called every time sbar(  ) is called
+		// @todo old code, should be removed
 		/*
 		function toggle(  ) {  
 			if ( width < 30 ) { 
@@ -184,90 +194,8 @@
 					this.open(  );
 				}
 			}
-
-
-
-
 		}
-
 	}
-
-	
-
-	/***** old code just commented to start new 
-	(function($) {
-
-	$( '#sidebar' ).click( function(  ) {  
-		// @todo does not work: no access to sbar(  );
-		// var sidebar = sbar(  );
-		// sidebar.toggle(  );
-		console.log( "just been clicked" );
-	});
-		
-	
-
-	// Closure: http://javascriptissexy.com/understand-javascript-closures-with-ease/
-	function sbar(  )	{ 
-		const stateClose = 'close';
-		const stateOpen = 'open';
-
-		var widthpx = $( '#sidebar' ).css( 'width' );
-		var width = widthpx.slice( 0, widthpx.length - 2 );
-		width = Number( width );
-
-		// capsulated the toggle function, so that is not called every time sbar(  ) is called
-		function toggle(  ) {  
-			if ( width < 30 ) { 
-				openSidebar(  );
-			} else { 
-				closeSidebar(  );
-			}
-		}
-
-		// @todo rename to open(  )
-		// so that it can be called with sbar.open(  )
-		function openSidebar(  ) { 
-			$( '#sidebar' ).css( 'width', 200 );
-			$( '#link' ).css( 'display', 'inline');
-			setStatusSidebar( stateOpen );
-		}
-
-		// @todo rename to close(  )
-		function closeSidebar(  ) { 
-			$( '#sidebar' ).css( 'width', 29 );
-			$( '#link' ).css( 'display', 'none');
-			setStatusSidebar( stateClose );
-		}
-
-		function setStatusSidebar( setState = 'folded' ) { 
-			localStorage.setItem( 'statusSidebar', ( setState == stateClose ? stateClose : stateOpen ) );
-			console.log( 'statusSidebar is now: ' + setState )
-		}
-
-		// @todo rename to checkStatus(  )
-		function checkStatusSidebar(  ) { 
-
-			// check local storage
-			var currentState = localStorage.getItem( 'statusSidebar' );
-
-			if ( currentState === null ) { 
-				console.log( 'status of sidebar is not definied; so it shall be folded' );
-				currentState = stateClose;
-			} else { 
-				console.log( 'status of sidebar is DEFINIED: ' + currentState );
-			} 
-
-			console.log( currentState );
-			return currentState;
-		}
-
-	}
-
-
-	}( jQuery ));
-	*****/
-
-
 
 	</script>
   </body>
