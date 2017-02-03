@@ -126,7 +126,7 @@
 	});
 
 	function sideBarNew(  )	{ 
-		const stateClose = 'close';
+		const stateClose = 'close'; // should be key not available
 		const stateOpen = 'open';
 
 		console.log( "I am a sidebar!" );
@@ -161,13 +161,20 @@
 			   this.setState( stateClose );
 		   	},
 
-			setState: function ( setState = 'folded' ) { 
-				localStorage.setItem( 'statusSidebar', ( setState == stateClose ? stateClose : stateOpen ) );
-				console.log( 'statusSidebar is now: ' + setState )
+			setState: function ( setState = stateOpen ) { 
+				if ( setState == stateOpen ) {  
+					localStorage.setItem( 'stateSidebar', stateOpen );
+				} else {  
+					// this has the advantage that a new loaded page and a closed sidebar have the same state
+					localStorage.removeItem( 'stateSidebar' ); // value is null
+				}
+
+				// localStorage.setItem( 'stateSidebar', ( setState == stateClose ? stateClose : stateOpen ) );
+				console.log( 'stateSidebar is now: ' + this.getState(  ) );
 			}, 
 			
 			getState: function(  ) {
-				return localStorage.getItem( 'statusSidebar' );
+				return localStorage.getItem( 'stateSidebar' );
 		    },
 
 			toggle: function(  ) { 
