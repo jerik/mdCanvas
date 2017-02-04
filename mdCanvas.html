@@ -4,10 +4,13 @@
   <meta charset="utf-8">
   <title>MdCanvas</title>
 	<link rel="stylesheet" href="mdCanvas.css" type="text/css" media="screen" charset="utf-8">
-  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  	<!--script src="https://code.jquery.com/jquery-1.10.2.js"></script-->
+  	<script src="jquery-1.10.2.js"></script>
 	<script src="mdCanvas.js"></script>
 	<script src="mdfiles.js"></script>
-  	<script src="https://cdn.rawgit.com/showdownjs/showdown/1.4.2/dist/showdown.min.js"></script>
+  	<!--script
+		src="https://cdn.rawgit.com/showdownjs/showdown/1.4.2/dist/showdown.min.js"></script-->
+  	<script src="showdown.min.js"></script>
   </head>
   <body>
   <div id="sidebar">
@@ -99,12 +102,10 @@
 	 * http://stackoverflow.com/a/23189786/1933185
 	 ***/ 
 
-	console.log( 'first lStorage:' );
-	console.log( localStorage  );
 	(function($) {
 		
 		var filenames = g_FOLDER_CONTENTS.match(/\S+/g);
-		console.log( filenames );
+		//console.log( filenames );
 		var cleanFilenames = $.map( filenames, function( n ) { 
 			return( ( /readme/i ).test( n ) ? null : n );
 			} );
@@ -117,28 +118,19 @@
 			$( '<a>', { text: name, href: '?md=' + name } ).appendTo( li );
 		});
 
-		// test localStorage
-		localStorage.setItem( 'foo', Date.now(  ) );
-
 		// open or close sidebar based on the localstorage
 		// ugly as I repeat myself, have to search later for a cleaner solution
 		const stateOpen = 'open';
-		console.log( 'initial load, stateSidebar is: ' + localStorage.getItem( 'stateSidebar' ) );
 		if ( localStorage.getItem( 'stateSidebar' ) == stateOpen ) { 
 			   	$( '#sidebar' ).css( 'width', 200 );
 			   	$( '#link' ).css( 'display', 'inline');
 				localStorage.setItem( 'stateSidebar', stateOpen );
 		}
 
-		console.log( 'second ( inside ) lStorage: ' + localStorage.toString()  );
-		console.log( localStorage  );
 	}( jQuery ));
-	console.log( 'third lStorage: ' );
-		console.log( localStorage  );
 
 
-	$( '#sidebar' ).click( function(  ) {  
-		console.log( "just been NEW clicked" );
+	$( '#toggler' ).click( function(  ) {  
 		var nsiba = new sideBarNew(  );
 		nsiba.toggle(  );
 	});
@@ -147,25 +139,6 @@
 	function sideBarNew(  )	{ 
 		const stateClose = 'close'; 
 		const stateOpen = 'open';
-
-		console.log( "I am a sidebar!" );
-
-		// @todo do I need this?
-		var widthpx = $( '#sidebar' ).css( 'width' );
-		var width = widthpx.slice( 0, widthpx.length - 2 );
-		width = Number( width );
-
-		// capsulated the toggle function, so that is not called every time sbar(  ) is called
-		// @todo old code, should be removed
-		/*
-		function toggle(  ) {  
-			if ( width < 30 ) { 
-				openSidebar(  );
-			} else { 
-				closeSidebar(  );
-			}
-		}
-		*/
 
 		return {  
 
@@ -181,7 +154,7 @@
 			   this.setState( stateClose );
 		   	},
 
-			setState: function ( setState = stateOpen ) { 
+			setState: function ( setState ) { 
 				if ( setState == stateOpen ) {  
 					localStorage.setItem( 'stateSidebar', stateOpen );
 				} else {  
@@ -189,8 +162,6 @@
 					localStorage.removeItem( 'stateSidebar' ); // value is null
 				}
 
-				// localStorage.setItem( 'stateSidebar', ( setState == stateClose ? stateClose : stateOpen ) );
-				console.log( 'stateSidebar is now: ' + this.getState(  ) );
 			}, 
 			
 			getState: function(  ) {

@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <title>testLocalStorage</title>
 	<link rel="stylesheet" href="mdCanvas.css" type="text/css" media="screen" charset="utf-8">
-  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  	<!--script src="https://code.jquery.com/jquery-1.10.2.js"></script-->
+  	<script src="jquery-1.10.2.js"></script>
 	<script src="mdCanvas.js"></script>
 	<!--
 	<script src="mdfiles.js"></script>
@@ -14,7 +15,7 @@
   <body>
   <button id="sidebar">Foo</button><br>
   <a href="testLocalStorage.html">link myself</a><br>
-  <a href="testLocalStorage.html">link myself?md=bar</a><br>
+  <a href="testLocalStorage.html?md=bar">link myself?md=bar</a><br>
 	
 	<script type="text/javascript" charset="utf-8">
 
@@ -29,8 +30,9 @@
 	console.log( localStorage  );
 	(function($) {
 		
+	 	var varname = Date.now(  );
 		// test localStorage
-		localStorage.setItem( 'foo', Date.now(  ) );
+		localStorage.setItem( varname, Date.now(  ) );
 
 		// open or close sidebar based on the localstorage
 		// ugly as I repeat myself, have to search later for a cleaner solution
