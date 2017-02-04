@@ -131,12 +131,13 @@
 
 
 	$( '#toggler' ).click( function(  ) {  
-		var nsiba = new sideBarNew(  );
+		// is there a way to avoid creating the sideBar on each click new...
+		var nsiba = new sideBar(  );
 		nsiba.toggle(  );
 	});
 
 	// Closure: http://javascriptissexy.com/understand-javascript-closures-with-ease/
-	function sideBarNew(  )	{ 
+	function sideBar(  )	{ 
 		const stateClose = 'close'; 
 		const stateOpen = 'open';
 
@@ -156,12 +157,13 @@
 
 			setState: function ( setState ) { 
 				if ( setState == stateOpen ) {  
+					// if there will be more localStorage action, create a object for it
+					// that do formal checks, if storage available, etc
 					localStorage.setItem( 'stateSidebar', stateOpen );
 				} else {  
 					// this has the advantage that a new loaded page and a closed sidebar have the same state
 					localStorage.removeItem( 'stateSidebar' ); // value is null
 				}
-
 			}, 
 			
 			getState: function(  ) {
@@ -177,7 +179,6 @@
 			}
 		}
 	}
-
 	</script>
   </body>
 </html>	
