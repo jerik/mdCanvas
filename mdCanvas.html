@@ -14,7 +14,7 @@
   </head>
   <body>
   <div id="sidebar">
-  <button id="toggler" onclick="">&laquo;</button>
+  <a id="toggler" onclick="">&raquo;</a>
 	  <ul id="link" style="display:none">
 	  </ul>
   </div>
@@ -145,12 +145,14 @@
 
 			open:  function(  ) { 
 			   $( '#sidebar' ).css( 'width', 200 );
+			   $( '#toggler' ).html( '&laquo;' );
 			   $( '#link' ).css( 'display', 'inline');
 			   this.setState( stateOpen );
 			},
 
 			close: function (  ) { 
 			   $( '#sidebar' ).css( 'width', 29 );
+			   $( '#toggler' ).html( '&raquo;' );
 			   $( '#link' ).css( 'display', 'none');
 			   this.setState( stateClose );
 		   	},
