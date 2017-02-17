@@ -110,6 +110,15 @@
 			return( ( /readme/i ).test( n ) ? null : n );
 			} );
 		//console.log( cleanFilenames );
+
+		console.log( cleanFilenames.length );
+
+		// remove sidebar if 0 or 1 entries available
+		if ( cleanFilenames.length < 2 ) { 
+			$( '#sidebar' ).remove(  );
+			return;
+		}
+
 		$.each( cleanFilenames, function( key, value ) { 
 			console.log( value );
 			var li = $( '<li>' ).appendTo( '#link' );
