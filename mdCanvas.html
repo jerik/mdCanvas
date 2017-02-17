@@ -106,6 +106,13 @@
 		
 		var filenames = g_FOLDER_CONTENTS.match(/\S+/g);
 		//console.log( filenames );
+
+		// remove sidebar and cancel function, do avaid erros in $.map
+		if ( filenames == null ) { 
+			removeSidebar(  );
+			return;
+		}
+
 		var cleanFilenames = $.map( filenames, function( n ) { 
 			return( ( /readme/i ).test( n ) ? null : n );
 			} );
@@ -115,7 +122,7 @@
 
 		// remove sidebar if 0 or 1 entries available
 		if ( cleanFilenames.length < 2 ) { 
-			$( '#sidebar' ).remove(  );
+			removeSidebar(  );
 			return;
 		}
 
@@ -128,19 +135,23 @@
 		});
 
 		// open or close sidebar based on the localstorage
-		// ugly as I repeat myself, have to search later for a cleaner solution
+		// @todo ugly as I repeat myself, have to search later for a cleaner solution
 		const stateOpen = 'open';
 		if ( localStorage.getItem( 'stateSidebar' ) == stateOpen ) { 
-			   	$( '#sidebar' ).css( 'width', 200 );
-			   	$( '#link' ).css( 'display', 'inline');
+			    $( '#sidebar' ).css( 'width', 200 );
+			    $( '#toggler' ).html( '&laquo;' );
+			    $( '#link' ).css( 'display', 'inline');
 				localStorage.setItem( 'stateSidebar', stateOpen );
 		}
 
+		function removeSidebar(  ) { 
+			$( '#sidebar' ).remove(  );
+		}
 	}( jQuery ));
 
 
 	$( '#toggler' ).click( function(  ) {  
-		// is there a way to avoid creating the sideBar on each click new...
+		// @todo is there a way to avoid creating the sideBar on each click new...
 		var nsiba = new sideBar(  );
 		nsiba.toggle(  );
 	});
