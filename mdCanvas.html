@@ -103,6 +103,14 @@
 	 ***/ 
 
 	(function($) {
+
+		//console.log( navigator.userAgent );
+		if ( ! navigator.userAgent.match( /firefox/i ) ) { 
+			$( 'body' ).prepend( "<div style='color:red'>mdCanvas works currently only in Firefox." );
+		} 
+
+	 	// check supported Browsers. Currently only Firefox :( 
+
 		
 		var filenames = g_FOLDER_CONTENTS.match(/\S+/g);
 		//console.log( filenames );
