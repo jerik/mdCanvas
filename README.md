@@ -1,6 +1,8 @@
 # mdCanvas
 Create a Lean Canvas out of a markdown list 
 
+**!! Works currently only with firefox !!**
+
 ## Examples
 [Rendered lean canvas]( https://jerik.github.io/mdCanvas/mdCanvas.html ) based on this markdown file: [mdCanvas.md]( https://raw.githubusercontent.com/jerik/mdCanvas/master/mdCanvas.md )
 
