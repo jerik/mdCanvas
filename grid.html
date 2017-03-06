@@ -6,18 +6,22 @@
   <style type="text/css" media="screen">
   /* Testing grids */
   	.containerbox { 
+	  // height: 100vh;
 	  display: grid;
 	  grid-template-rows: 200px 1fr 100px;
 	  grid-template-columns: 20% 20% 20% 20% 20%;
+	  grid-auto-flow: column;
+	  grid-row-gap: 2px;
+	  grid-column-gap: 2px;
   	}
 
 	#mdc-problem { background-color:#a7e43a; }
 	#mdc-solution { background-color:#e43a74; }
-	#mdc-key-metrics { background-color:#b7e48a; }
+	#mdc-key-metrics { background-color:#00e4a8; }
 	#mdc-unique-value-proposition { background-color:#ade477; }
 	#mdc-unfair-advantage { background-color:#73443a; }
-	#mdc-channels { background-color:#a7e843; }
-	#mdc-customer-segment { background-color:#aae437; }
+	#mdc-channels { background-color:gray; }
+	#mdc-customer-segment { background-color:#0000ff; }
 	#mdc-cost-structure { background-color:#a7043a; }
 	#mdc-revenue-stream { background-color:#f70430; }
 	#mdc-todo { background-color:tomato; }
