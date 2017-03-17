@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>QUnit 2.2.0 Example</title>
+      <link rel="stylesheet" href="qunit-2.2.0.css">
+   </head>
+   <body>
+      <div id="qunit"></div>
+      <div id="qunit-fixture"></div>
+      <script src="qunit-2.2.0.js"></script>
+	  <!-- 
+		https://www.sitepoint.com/getting-started-qunit/
+	  	Same as in the module.html, had to adapt relative path 
+
+		Added systemjs and the things, as I am not sure that qunit can 
+		handle es6
+
+		@todo Perhaps add the feature to load the tests via Javascript
+		http://davidvujic.blogspot.de/2015/03/es6-and-tdd-can-i-test-it.html
+	  -->
+	  <script src="../js/systemjs/dist/system.js"></script>
+	  <script>
+		SystemJS.import('https://code.jquery.com/jquery.js');
+
+		SystemJS.config({
+		  map: {
+			'plugin-babel': '../js/plugin-babel/plugin-babel.js',
+			'systemjs-babel-build': '../js/plugin-babel/systemjs-babel-browser.js'
+		  },
+		  transpiler: 'plugin-babel'
+		});
+
+	  </script>
+	  <!-- same as in the module.html -->
+	  <script type="text/javascript" charset="utf-8">
+		SystemJS.import('../js/modules/mdCanvas.js').then( function( qob ) { 
+	  	
+			var use = new qob.main;
+			// console.log( new qob.main(  ).say );
+			// console.log( use.say );
+			QUnit.module( "Get md files" ); // not sure how to use this
+			QUnit.test( "getMdFiles", function( assert ) { 
+				assert.equal( use.getMdFiles(  ), "mdCanvas", "Default md-file mdCanvas is true" );
+
+				// Cannto Mock URL, this will not be tested
+				// http://stackoverflow.com/a/31317321/1933185
+				// window.history.pushState( {  }, '?md=Foobar');
+				// assert.equal( use.getMdFiles(  ), "Foobar", "Used md-file Foobar; passed" );
+
+				var checkString = "es6";
+				//assert.ok( use.say.includes( checkString ), "String contains" + checkString);
+				// http://es6-features.org/#StringInterpolation
+				assert.ok( use.say.includes( checkString ), `String containts ${ checkString }`);
+			} );
+
+		} );
+
+	  </script>
+   </body>
+</html>
