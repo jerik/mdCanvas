@@ -4,7 +4,7 @@
 
 	<title>JS Module</title>
 	
-	<script src="module/system.js"></script>
+	<script src="js/systemjs/dist/system.js"></script>
 	<script>
 		// loads relative to the current page URL
 		// SystemJS.import('./module/foo.js');
@@ -13,12 +13,13 @@
 		// @todo does not work
 		SystemJS.config({
 		  map: {
-			'plugin-babel': 'module/babel.min.js'
+			'plugin-babel': 'js/plugin-babel/plugin-babel.js',
+			'systemjs-babel-build': 'js/plugin-babel/systemjs-babel-browser.js'
 		  },
 		  transpiler: 'plugin-babel'
 		});
 
-		SystemJS.import('./module/foo.js').then( function( message ) { 
+		SystemJS.import('./js/module/foo.js').then( function( message ) { 
 				console.log( new message.bar(  ).say );
 		} );
 /* 
