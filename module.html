@@ -6,11 +6,8 @@
 	
 	<script src="js/systemjs/dist/system.js"></script>
 	<script>
-		// loads relative to the current page URL
-		// SystemJS.import('./module/foo.js');
+		SystemJS.import('https://code.jquery.com/jquery.js');
 
-		// https://www.npmjs.com/package/babel-plugin-systemjs
-		// @todo does not work
 		SystemJS.config({
 		  map: {
 			'plugin-babel': 'js/plugin-babel/plugin-babel.js',
@@ -19,19 +16,9 @@
 		  transpiler: 'plugin-babel'
 		});
 
-		SystemJS.import('./js/module/foo.js').then( function( message ) { 
-				console.log( new message.bar(  ).say );
+		SystemJS.import('./js/modules/mdCanvas.js').then( function( message ) { 
+				console.log( new message.main(  ).say );
 		} );
-/* 
-Error: Unable to dynamically transpile ES module
-   A loader plugin needs to be configured via 
-   `SystemJS.config({ transpiler: 'transpiler-module' })`.
-  Instantiating file:///Users/jerik/workspace/fastcanvas/mdCanvas/module/foo.js
-  Loading ./module/foo.js
-*/
-
-		// load from an absolute URL directly
-		SystemJS.import('https://code.jquery.com/jquery.js');
 	</script>
 </head>
 <body>
