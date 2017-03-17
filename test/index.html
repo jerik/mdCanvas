@@ -39,15 +39,14 @@
 			var use = new qob.main;
 			// console.log( new qob.main(  ).say );
 			// console.log( use.say );
-			QUnit.module( "Get md files" ); // not sure how to use this
-			QUnit.test( "getMdFiles", function( assert ) { 
+			// QUnit.module( "Get md files from url" ); // not sure how to use this
+			QUnit.test( "getMdFiles - get file from url", function( assert ) { 
 				assert.equal( use.getMdFiles(  ), "mdCanvas", "Default md-file mdCanvas is true" );
+				assert.equal( use.getMdFiles( 'md=mdFoo'), "mdFoo", "md-file mdFoo is true" );
+				assert.equal( use.getMdFiles( 'md=mdFoo&foo=bar'), "mdFoo", "md-file mdFoo is true" );
+			} );
 
-				// Cannto Mock URL, this will not be tested
-				// http://stackoverflow.com/a/31317321/1933185
-				// window.history.pushState( {  }, '?md=Foobar');
-				// assert.equal( use.getMdFiles(  ), "Foobar", "Used md-file Foobar; passed" );
-
+			QUnit.test( "say - smoketest", function( assert ) {
 				var checkString = "es6";
 				//assert.ok( use.say.includes( checkString ), "String contains" + checkString);
 				// http://es6-features.org/#StringInterpolation

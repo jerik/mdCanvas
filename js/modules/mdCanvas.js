@@ -1,13 +1,15 @@
 export class main { 
 	constructor(  ) { 
-		var furl = this.getMdFiles(  );
+		var url = window.location.search.substring( 1 ); // get the params after ? in the url
+		var furl = this.getMdFiles( url );
 		this.say = "This is a es6 main test module:" + furl;
 	}
 
-	getMdFiles(  ) { 
+	getMdFiles( currentUrl ) { 
 		// http://stackoverflow.com/a/21903119/1933185
-		var getUrlParameter = function getUrlParameter(sParam) {
-			var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		// relocated window.location.search.substring( 1 ), to make it better testable with qunit
+		var getUrlParameter = function getUrlParameter(sParam, url) {
+			var sPageURL = decodeURIComponent(url),
 				sURLVariables = sPageURL.split('&'),
 				sParameterName,
 				i;
@@ -21,7 +23,7 @@ export class main {
 			}
 		};
 
-		return getUrlParameter( 'md' ) || 'mdCanvas';
+		return getUrlParameter( 'md', currentUrl ) || 'mdCanvas';
 	}
 
 }
