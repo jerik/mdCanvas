@@ -1,3 +1,6 @@
 [submodule "js/plugin-babel"]
 	path = js/plugin-babel
 	url = https://github.com/systemjs/plugin-babel.git
+[submodule "js/systemjs"]
+	path = js/systemjs
+	url = https://github.com/systemjs/systemjs.git
