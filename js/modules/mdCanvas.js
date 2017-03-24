@@ -1,13 +1,14 @@
 export class main { 
 	constructor(  ) { 
 		var url = window.location.search.substring( 1 ); // get the params after ? in the url
-		var furl = this.getMdFiles( url );
-		this.say = "This is a es6 main test module:" + furl;
+		var filename = this.getFilenameFrom( url );
+		this.getFile( filename );
+		this.say = "This is a es6 main test module:" + filename;
 	}
 
-	getMdFiles( currentUrl ) { 
+	getFilenameFrom( currentUrl ) { 
 		// http://stackoverflow.com/a/21903119/1933185
-		// relocated window.location.search.substring( 1 ), to make it better testable with qunit
+		// relocated window.location.search.substring( 1 ) as parameter currentUrl, to make it better testable with qunit
 		var getUrlParameter = function getUrlParameter(sParam, url) {
 			var sPageURL = decodeURIComponent(url),
 				sURLVariables = sPageURL.split('&'),
@@ -24,6 +25,33 @@ export class main {
 		};
 
 		return getUrlParameter( 'md', currentUrl ) || 'mdCanvas';
+	}
+
+	getFile( filename ) { 
+		var pathmd = filename + ".md";
+		$.get( pathmd, function( data ) { 
+			console.log( data );
+			return data;
+		}, 'text' );
+	}
+
+	parseSections( content ) { 
+		if ( content == undefined ) { 
+			return new Error( "Missing parameter 'content'" );
+		}
+		var parts = content.split( '#' );
+
+		// tidy up array, remove first empty entry
+		if ( Array.isArray( parts ) && parts.length > 1) { 
+			if ( parts[0] == "" ) { 
+				parts.shift(  );
+			}
+		}
+		console.log( parts );
+		return parts;
+
+		// @todo get header, by spliting the first line \n
+		// @todo bastel object with heading and content
 	}
 
 }

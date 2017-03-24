@@ -40,11 +40,30 @@
 			// console.log( new qob.main(  ).say );
 			// console.log( use.say );
 			// QUnit.module( "Get md files from url" ); // not sure how to use this
-			QUnit.test( "getMdFiles - get file from url", function( assert ) { 
-				assert.equal( use.getMdFiles(  ), "mdCanvas", "Default md-file mdCanvas is true" );
-				assert.equal( use.getMdFiles( 'md=mdFoo'), "mdFoo", "md-file mdFoo is true" );
-				assert.equal( use.getMdFiles( 'md=mdFoo&foo=bar'), "mdFoo", "md-file mdFoo is true" );
+			QUnit.test( "getFilenameFrom - get filename from url", function( assert ) { 
+				assert.equal( use.getFilenameFrom(  ), "mdCanvas", "Default md-file mdCanvas is true" );
+				assert.equal( use.getFilenameFrom( 'md=mdFoo'), "mdFoo", "md-file mdFoo is true" );
+				assert.equal( use.getFilenameFrom( 'md=mdFoo&foo=bar'), "mdFoo", "md-file mdFoo is true" );
+				assert.equal( use.getFilenameFrom( 'mdx=mdFoo&foo=bar'), "mdCanvas", "Default md-file mdCanvas is true" );
 			} );
+
+			/*
+			// there is no return methode on this function, the tests make no sense
+			QUnit.test( 'getFile content of the md-file', function( assert ) { 
+				assert.notOk( use.getFile(  ) , 'There is no file content, missing filename parameter'  );
+				assert.notOk( use.getFile( 'mdFoo' ), 'There is no file content, filename does not exists' );
+				// hard to test, as it is async. 
+				//assert.ok( use.getFile( 'mdCanvas' ).includes( '#' ), 'There is file content' );
+			} );
+			*/
+
+			QUnit.test( 'parseSections - split file in sections for the canvas boxes', function( assert ) { 
+					var content = "# Canvas \n#Section";
+					assert.ok( Array.isArray(use.parseSections( content )), 'Return value is an array' );
+					assert.ok( use.parseSections( content ), 'There are sections' );
+					assert.ok( use.parseSections( ) instanceof Error, 'There is missing content. Error thrown' );
+					assert.ok( use.parseSections( 'no sections' ).length == 1, 'There are no sections' );
+			} )
 
 			QUnit.test( "say - smoketest", function( assert ) {
 				var checkString = "es6";
