@@ -39,9 +39,18 @@
 			var use = new qob.main;
 			// console.log( new qob.main(  ).say );
 			// console.log( use.say );
-			// QUnit.module( "Get md files from url" ); // not sure how to use this
+			QUnit.module( "Unit Tests" ); 
+
+			QUnit.test( "getUrl - check url", function( assert ) { 
+				var uri = 'test.de'; // http://t3n.de/news/url-uri-unterschiede-516483/
+				var url = "http://" + uri;
+				assert.equal( use.getUrlParams( url + "?md=mdFoo" ), "md=mdFoo", "Default md-file mdCanvas is true" );
+			} );
+
 			QUnit.test( "getFilenameFrom - get filename from url", function( assert ) { 
-				assert.equal( use.getFilenameFrom(  ), "mdCanvas", "Default md-file mdCanvas is true" );
+				// assert.equal( use.getFilenameFrom( ), "mdCanvas", "Default md-file mdCanvas is true" ); // This will not work, as the parameter url cannot be undefined
+				assert.equal( use.getFilenameFrom( '' ), "mdCanvas", "Default md-file mdCanvas is true" );
+				assert.equal( use.getFilenameFrom( 'http://test.de?' ), "mdCanvas", "Default md-file mdCanvas is true" );
 				assert.equal( use.getFilenameFrom( 'md=mdFoo'), "mdFoo", "md-file mdFoo is true" );
 				assert.equal( use.getFilenameFrom( 'md=mdFoo&foo=bar'), "mdFoo", "md-file mdFoo is true" );
 				assert.equal( use.getFilenameFrom( 'mdx=mdFoo&foo=bar'), "mdCanvas", "Default md-file mdCanvas is true" );
@@ -63,7 +72,22 @@
 					assert.ok( use.parseSections( content ), 'There are sections' );
 					assert.ok( use.parseSections( ) instanceof Error, 'There is missing content. Error thrown' );
 					assert.ok( use.parseSections( 'no sections' ).length == 1, 'There are no sections' );
+					content = content + "\n some more \nlines of text\n does this work?";
+					assert.ok( use.parseSections( content ), 'There are sections' );
 			} )
+
+			QUnit.test( 'getHeadings - get headings for the canvas boxes', function( assert ) { 
+					var content = "# Canvas \n"; // "#Section \nThis is a description\nof the section foo.";
+					assert.ok( use.getHeading( content ), 'There is a heading' );
+					assert.ok( (typeof use.getHeading( content ) === "string"), 'Heading is a string' );
+					/** makes no sense to test that
+					 * assert.ok( use.getHeading( content ).indexOf( '#' ) != -1, 'Heading contains a hash ( # )' );
+					 *assert.ok( use.getHeading( content.substr( 1 ) ).indexOf( '#' ) == -1, 'Heading contains a NO hash ( # )' );
+					 *assert.ok( use.getHeading( '#' + content ).indexOf( '#' ) != -1, 'Heading contains a hash ( # )' );
+					 *assert.ok( use.getHeading( '##' + content ).indexOf( '#' ) != -1, 'Heading contains a hash ( # )' );
+					 */
+			} )
+
 
 			QUnit.test( "say - smoketest", function( assert ) {
 				var checkString = "es6";
@@ -71,6 +95,14 @@
 				// http://es6-features.org/#StringInterpolation
 				assert.ok( use.say.includes( checkString ), `String containts ${ checkString }`);
 			} );
+
+			/*
+			QUnit.module( "Integration Tests" ); 
+			QUnit.test( 'init - check parsing', function( assert ) { 
+					// there is no return method for getFile, so I cannot test.... Currently 2017-03-31 it works :) regarding the console.log output
+					assert.ok( use.init( 'http://test.de?md=../mdCanvas' ), 'There is a heading' );
+			} )
+			*/
 
 		} );
 

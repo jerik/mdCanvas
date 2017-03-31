@@ -1,9 +1,26 @@
 export class main { 
+
 	constructor(  ) { 
-		var url = window.location.search.substring( 1 ); // get the params after ? in the url
+		this.init(  );
+		this.say = "This is a es6 main test module.";
+	}
+
+	// for integration tests 
+	// @todo integration test not possible as getFile has no return result...
+	init( url ) { 
+		// windows.location 		contains the full url 	> http://www.test.de?foo=bar&here=wegoagain
+		// windows.location.search 	contains the parameters > 					?foo=bar&here=wegoagain
+		// windows.location.search.substring( 1 ) removes the ? from the parameters
+		var url = url || window.location.search.substring( 1 ); // get the test url or the real parameters
 		var filename = this.getFilenameFrom( url );
-		this.getFile( filename );
-		this.say = "This is a es6 main test module:" + filename;
+		return this.getFile( filename );
+	}
+
+	getUrlParams( url ) {  // parameter is for testing purpose
+		// if url contains only "bar=foo&this=that", the follwing sliece does work and seams to return the untouched url. Thats ok for now.
+		var urlParams = url.slice( url.indexOf( '?' ) + 1 );
+		console.log( 'urlParams: ' + urlParams );
+		return urlParams;
 	}
 
 	getFilenameFrom( currentUrl ) { 
@@ -24,7 +41,10 @@ export class main {
 			}
 		};
 
-		return getUrlParameter( 'md', currentUrl ) || 'mdCanvas';
+		var urlParams = this.getUrlParams( currentUrl );
+
+		//return getUrlParameter( 'md', currentUrl ) || 'mdCanvas';
+		return getUrlParameter( 'md', urlParams ) || 'mdCanvas';
 	}
 
 	getFile( filename ) { 
@@ -50,8 +70,14 @@ export class main {
 		console.log( parts );
 		return parts;
 
-		// @todo get header, by spliting the first line \n
-		// @todo bastel object with heading and content
+	}
+
+	getHeading( content ) { 
+		var heading = content.slice( 0, content.indexOf("\n" ));
+		console.log( 'Heading: ' + heading );
+		return heading;
+		
+		// @todo bastel object with heading and content: { mdc-costs: "this is the \n text of the box" }
 	}
 
 }
