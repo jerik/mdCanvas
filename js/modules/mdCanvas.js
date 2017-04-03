@@ -13,7 +13,7 @@ export class main {
 		// windows.location.search.substring( 1 ) removes the ? from the parameters
 		var url = url || window.location.search.substring( 1 ); // get the test url or the real parameters
 		var filename = this.getFilenameFrom( url );
-		return this.getFile( filename );
+		this.getFile( filename );
 	}
 
 	getUrlParams( url ) {  // parameter is for testing purpose
@@ -49,10 +49,17 @@ export class main {
 
 	getFile( filename ) { 
 		var pathmd = filename + ".md";
+		var content = "";
+		// @todo here I have to dig in!!! with closure?
+		var foo = function( a ) { console.log( "##### DATA MATA" + a ); }
 		$.get( pathmd, function( data ) { 
 			console.log( data );
-			return data;
-		}, 'text' );
+			//return data;
+			content = data;
+		}, 'text' )
+		.done( function(  ){ 
+			foo( content );
+		} );
 	}
 
 	parseSections( content ) { 
