@@ -47,11 +47,24 @@ export class main {
 		return getUrlParameter( 'md', urlParams ) || 'mdCanvas';
 	}
 
+	/* 
+	 * parse(  ) { 
+	 * 	 var contentFile;
+	 * 	 var contentArr; // is that needed?
+	 * 	 var contentObj;
+	 * 	 getFilename(  ) { this.contentFile }
+	 * 	 getSections(  ) {  } // aka parseSections
+	 * 	 getHeading(  ) {  this.contentObj }
+	 * 	 ...
+	 * }
+	 */
 	getFile( filename ) { 
 		var pathmd = filename + ".md";
 		var content = "";
 		// @todo here I have to dig in!!! with closure?
+		// http://javascriptissexy.com/understand-javascript-closures-with-ease/
 		var foo = function( a ) { console.log( "##### DATA MATA" + a ); }
+
 		$.get( pathmd, function( data ) { 
 			console.log( data );
 			//return data;
