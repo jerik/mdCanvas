@@ -52,7 +52,7 @@ export class main {
 	 * 	 var contentFile;
 	 * 	 var contentArr; // is that needed?
 	 * 	 var contentObj;
-	 * 	 getFilename(  ) { this.contentFile }
+	 * 	 getFile(  ) { this.contentFile }
 	 * 	 getSections(  ) {  } // aka parseSections
 	 * 	 getHeading(  ) {  this.contentObj }
 	 * 	 ...
@@ -63,6 +63,7 @@ export class main {
 		var content = "";
 		// @todo here I have to dig in!!! with closure?
 		// http://javascriptissexy.com/understand-javascript-closures-with-ease/
+		// https://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
 		var foo = function( a ) { console.log( "##### DATA MATA" + a ); }
 
 		$.get( pathmd, function( data ) { 
