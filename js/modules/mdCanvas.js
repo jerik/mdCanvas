@@ -64,34 +64,38 @@ export class main {
 		// @todo here I have to dig in!!! with closure?
 		// http://javascriptissexy.com/understand-javascript-closures-with-ease/
 		// https://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
-		var foo = function( a ) { console.log( "##### DATA MATA" + a ); }
+		var parse = function(content) {
+			// console.log("do the parsing on: " + content)
+			getSections(content);
+		}
+
+		var getSections = function( content ) { 
+			if ( content == undefined ) { 
+				return new Error( "Missing parameter 'content'" );
+			}
+			var parts = content.split( '#' ); // @todo works only is not # is used as numbere list
+
+			// tidy up array, remove first empty entry
+			if ( Array.isArray( parts ) && parts.length > 1) { 
+				if ( parts[0] == "" ) { 
+					parts.shift(  );
+				}
+			}
+			console.log( parts );
+			return parts;
+
+		}
 
 		$.get( pathmd, function( data ) { 
-			console.log( data );
+			//console.log( data );
 			//return data;
 			content = data;
 		}, 'text' )
 		.done( function(  ){ 
-			foo( content );
+			parse( content );
 		} );
 	}
 
-	parseSections( content ) { 
-		if ( content == undefined ) { 
-			return new Error( "Missing parameter 'content'" );
-		}
-		var parts = content.split( '#' );
-
-		// tidy up array, remove first empty entry
-		if ( Array.isArray( parts ) && parts.length > 1) { 
-			if ( parts[0] == "" ) { 
-				parts.shift(  );
-			}
-		}
-		console.log( parts );
-		return parts;
-
-	}
 
 	getHeading( content ) { 
 		var heading = content.slice( 0, content.indexOf("\n" ));
