@@ -82,7 +82,22 @@ export class main {
 				}
 			}
 			console.log( parts );
-			return parts;
+			//return parts;
+			buildData(parts);
+
+		}
+
+		// @todo 20170426 create dataObject 
+		var getHeading = function( parts ) { 
+			var heading = parts.slice( 0, parts.indexOf("\n" ));
+			console.log( 'Heading: ' + heading );
+			return heading;
+
+			// @todo bastel object with heading and content: { mdc-costs: "this is the \n text of the box" }
+		}
+
+		var buildData = function(parts) {
+			getHeading(parts);
 
 		}
 
@@ -97,12 +112,5 @@ export class main {
 	}
 
 
-	getHeading( content ) { 
-		var heading = content.slice( 0, content.indexOf("\n" ));
-		console.log( 'Heading: ' + heading );
-		return heading;
-		
-		// @todo bastel object with heading and content: { mdc-costs: "this is the \n text of the box" }
-	}
 
 }
