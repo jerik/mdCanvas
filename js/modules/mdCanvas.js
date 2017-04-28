@@ -13,7 +13,23 @@ export class main {
 		// windows.location.search.substring( 1 ) removes the ? from the parameters
 		var url = url || window.location.search.substring( 1 ); // get the test url or the real parameters
 		var filename = this.getFilenameFrom( url );
-		this.getFile( filename );
+		var fooOuter = "";
+		// @todo 20170428 does not work, but dig in into the article, see the Promisifying XMLHttpRequest
+		// https://developers.google.com/web/fundamentals/getting-started/primers/promises
+		/*
+		var promise = new Promise(function(resolve, reject)) {
+		*/
+			fooOuter = this.getFile( filename );
+		/*
+			if (fooOuter != "undefined") {
+				resolve(console.log("##### resolved"));
+			} else {
+				reject(Error("it broke"));
+			}
+
+		}
+		*/
+		console.log('fooOuoter: ' +fooOuter);
 	}
 
 	getUrlParams( url ) {  // parameter is for testing purpose
@@ -64,8 +80,10 @@ export class main {
 		// @todo here I have to dig in!!! with closure?
 		// http://javascriptissexy.com/understand-javascript-closures-with-ease/
 		// https://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
+		var foobar = "";
 		var parse = function(content) {
 			// console.log("do the parsing on: " + content)
+			foobar = "parse";
 			getSections(content);
 		}
 
@@ -74,6 +92,7 @@ export class main {
 				return new Error( "Missing parameter 'content'" );
 			}
 			var parts = content.split( '#' ); // @todo works only is not # is used as numbere list
+			foobar = "getSections";
 
 			// tidy up array, remove first empty entry
 			if ( Array.isArray( parts ) && parts.length > 1) { 
@@ -91,12 +110,14 @@ export class main {
 		var getHeading = function( parts ) { 
 			var heading = parts.slice( 0, parts.indexOf("\n" ));
 			console.log( 'Heading: ' + heading );
+			foobar = "getHeading";
 			return heading;
 
 			// @todo bastel object with heading and content: { mdc-costs: "this is the \n text of the box" }
 		}
 
 		var buildData = function(parts) {
+			foobar = "buildData";
 			getHeading(parts);
 
 		}
@@ -108,6 +129,8 @@ export class main {
 		}, 'text' )
 		.done( function(  ){ 
 			parse( content );
+			console.log('get.done: ' + foobar);
+			return foobar;
 		} );
 	}
 
