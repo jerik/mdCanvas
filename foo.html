@@ -1,0 +1,42 @@
+<html>	
+	<head>
+	<title>bar test</title>
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script>
+		window.onload = function() {
+			console.log( "jQuery " + (window.jQuery ? "success" : "failure"));
+
+			var filename = 'bar.txt';
+			var file = getFile(filename);
+			var fileProceeded;
+
+			// closure
+			var proceedFile = function(content) {
+				fileProceeded = file.replace('bar', 'FOO');
+				console.log("content of variable fileProceeded: " + tmp);
+			}
+
+			function getFile( filename ) { 
+
+				$.get( filename, function( data ) { 
+						//console.log( data );
+						//return data;
+						content = data;
+					}, 'text' )
+				.done( function(  ){ 
+						console.log('get.done: ' + content);
+						proceedFile(content);
+					} );
+			}
+			console.log("content of variable file: " + file);
+
+			// work on the result of fileProceeded
+			file2 = fileProceeded.replace('FOO', 'BAR');
+			console.log("content of variable file2: " + file2)
+
+		}	
+	</script>
+	</head>
+	<body>
+	</body>
+</html>

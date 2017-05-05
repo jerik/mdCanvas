@@ -1,25 +1,27 @@
 export class main { 
 
-	constructor(  ) { 
-		this.init(  );
-		this.say = "This is a es6 main test module.";
-	}
+		constructor(  ) { 
+			this.init(  );
+			this.say = "This is a es6 main test module.";
+		}
 
-	// for integration tests 
-	// @todo integration test not possible as getFile has no return result...
-	init( url ) { 
-		// windows.location 		contains the full url 	> http://www.test.de?foo=bar&here=wegoagain
-		// windows.location.search 	contains the parameters > 					?foo=bar&here=wegoagain
-		// windows.location.search.substring( 1 ) removes the ? from the parameters
-		var url = url || window.location.search.substring( 1 ); // get the test url or the real parameters
-		var filename = this.getFilenameFrom( url );
-		var fooOuter = "";
-		// @todo 20170428 does not work, but dig in into the article, see the Promisifying XMLHttpRequest
-		// https://developers.google.com/web/fundamentals/getting-started/primers/promises
-		/*
-		var promise = new Promise(function(resolve, reject)) {
-		*/
-			fooOuter = this.getFile( filename );
+		// for integration tests 
+		// @todo integration test not possible as getFile has no return result...
+		init( url ) { 
+			// windows.location 		contains the full url 	> http://www.test.de?foo=bar&here=wegoagain
+			// windows.location.search 	contains the parameters > 					?foo=bar&here=wegoagain
+			// windows.location.search.substring( 1 ) removes the ? from the parameters
+			var url = url || window.location.search.substring( 1 ); // get the test url or the real parameters
+			var filename = this.getFilenameFrom( url );
+			var fooOuter = "";
+			// @todo 20170428 does not work, but dig in into the article, see the Promisifying XMLHttpRequest
+			// https://developers.google.com/web/fundamentals/getting-started/primers/promises
+			/*
+			var promise = new Promise(function(resolve, reject)) {
+			*/
+			//fooOuter = this.getFile( filename );
+			//this.getFilenameFrom(filename);
+			this.getFile(filename);
 		/*
 			if (fooOuter != "undefined") {
 				resolve(console.log("##### resolved"));
@@ -131,6 +133,26 @@ export class main {
 			parse( content );
 			console.log('get.done: ' + foobar);
 			return foobar;
+		} );
+	}
+
+	// https://davidwalsh.name/write-javascript-promises
+	// http://www.htmlgoodies.com/beyond/javascript/making-promises-with-jquery-deferred.html
+	// http://joseoncode.com/2011/09/26/a-walkthrough-jquery-deferred-and-promise/
+	// https://developers.google.com/web/fundamentals/getting-started/primers/promises
+	getFilePromise( filename ) { 
+		var pathmd = filename + ".md";
+
+		return new Promise(resolve, reject) {
+		}
+		$.get( pathmd, function( data ) { 
+			//console.log( data );
+			//return data;
+			content = data;
+		}, 'text' )
+		.done( function(  ){ 
+			console.log('get.done: ' + content);
+			return content;
 		} );
 	}
 
