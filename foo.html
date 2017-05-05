@@ -7,14 +7,53 @@
 			console.log( "jQuery " + (window.jQuery ? "success" : "failure"));
 
 			var filename = 'bar.txt';
-			var file = getFile(filename);
-			var fileProceeded;
+			//var file = getFile(filename);
+			//var fileProceeded;
+			//getFileDerf(filename);
+
+			var file = getFileDerf(filename);
+
+
+			//proceedFile(getFileDerf(filename));
+			proceedFile(file);
 
 			// closure
 			var proceedFile = function(content) {
 				fileProceeded = file.replace('bar', 'FOO');
 				console.log("content of variable fileProceeded: " + tmp);
 			}
+
+			//
+http://www.danieldemmel.me/blog/2013/03/22/an-introduction-to-jquery-deferred-slash-promise/
+			function getFileDerf(filename) {
+				return $.get( filename, function( data ) { 
+						//console.log( data );
+						//return data;
+						content = data;
+						console.log("getFileDerf: " + content);
+					}, 'text' );
+			}
+
+			/*
+			function proceedFile(futureFile) {
+				futureFile.done(function(result) {
+				 var tmp = result.replace('bar', 'FOO');
+					console.log(tmp);
+				});
+			}
+			*/
+			function proceedFile(futureFile) {
+				// return new Promise(function(resolve, reject)) }
+				futureFile.done(function(result) {
+				 	var tmp = result.replace('bar', 'FOO');
+					console.log(tmp);
+				 	tmp = tmp.replace('FOO', 'BAR');
+					console.log(tmp);
+					// return somehow  tmp	
+				});
+			}
+
+
 
 			function getFile( filename ) { 
 
@@ -28,11 +67,13 @@
 						proceedFile(content);
 					} );
 			}
+			/*
 			console.log("content of variable file: " + file);
 
 			// work on the result of fileProceeded
 			file2 = fileProceeded.replace('FOO', 'BAR');
 			console.log("content of variable file2: " + file2)
+			*/
 
 		}	
 	</script>
