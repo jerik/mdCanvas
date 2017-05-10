@@ -17,15 +17,15 @@
 			//proceedFile(getFileDerf(filename));
 			proceedFile(file);
 
+			var thatFile = procFile(file, 'This', 'THAT');
+			var whohayFile = procFile(thatFile, 'THAT', 'WHOHAY');
+
 			// closure
 			var proceedFile = function(content) {
 				fileProceeded = file.replace('bar', 'FOO');
 				console.log("content of variable fileProceeded: " + tmp);
 			}
 
-			//
-http://www.danieldemmel.me/blog/2013/03/22/an-introduction-to-jquery-deferred-slash-promise/
-			// https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
 			function getFileDerf(filename) {
 				return $.get( filename, function( data ) { 
 						//console.log( data );
@@ -51,6 +51,18 @@ http://www.danieldemmel.me/blog/2013/03/22/an-introduction-to-jquery-deferred-sl
 				 	tmp = tmp.replace('FOO', 'BAR');
 					console.log(tmp);
 					// return somehow  tmp	
+				});
+			}
+
+			// @todo how to store the returned value!!!!
+			// https://stackoverflow.com/questions/14220321/how-do-i-return-the-response-from-an-asynchronous-call
+			// http://www.danieldemmel.me/blog/2013/03/22/an-introduction-to-jquery-deferred-slash-promise/
+			// https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
+			// return new Promise(function(resolve, reject)) }
+			function procFile(file, search, replace) {
+				return file.done(function(result){
+					var tmp = result.replace(search, replace);
+					console.log(replace + ": " + tmp);
 				});
 			}
 
