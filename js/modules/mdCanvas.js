@@ -14,7 +14,7 @@ export class main {
 			var url = url || window.location.search.substring( 1 ); // get the test url or the real parameters
 			var filename = this.getFilenameFrom( url );
 			var fooOuter = "";
-			// @todo 20170428 does not work, but dig in into the article, see the Promisifying XMLHttpRequest
+			// @todo 20170428 does not work, but dig in into the article, see the Promisifying XMLHttpRequest --> See foo.html
 			// https://developers.google.com/web/fundamentals/getting-started/primers/promises
 			/*
 			var promise = new Promise(function(resolve, reject)) {
@@ -143,8 +143,7 @@ export class main {
 	getFilePromise( filename ) { 
 		var pathmd = filename + ".md";
 
-		return new Promise(resolve, reject) {
-		}
+		//return new Promise(resolve, reject) { }
 		$.get( pathmd, function( data ) { 
 			//console.log( data );
 			//return data;
