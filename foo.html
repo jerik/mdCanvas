@@ -20,6 +20,41 @@
 			var thatFile = procFile(file, 'This', 'THAT');
 			var whohayFile = procFile(thatFile, 'THAT', 'WHOHAY');
 
+			
+			// Based on https://stackoverflow.com/questions/35135110/jquery-ajax-with-es6-promises
+			function ajax( options ) { 
+				return new Promise( function( resolve, reject ) { 
+					$.get( options ).done( resolve ).fail( reject );
+				});
+			}
+
+			var resolve = function ( data ) { 
+				var tmp = data.replace( 'This', 'FOOOOOO' );
+				console.log( "foo: ", tmp );
+				return tmp;
+			}
+
+			ajax( filename )
+				.then( 
+					function( data  ) {  // or resolve
+						var tmp = data.replace( 'This', 'FOOOOOO' );
+						console.log( "1. resolve: ", tmp );
+						return tmp;
+					}, 
+					function( data ) { // reject
+						console.log( "reject: ", data );
+					}
+				).catch( function( error ) { 
+					console.error( error )
+				} )
+				.then(  // work on the first promise result
+					function( data ) { 
+						var tmp = data.replace( 'content', 'BAAAR' );
+						console.log( "2. resolve: ", tmp );
+					}
+				);
+
+
 			// 20170523 
 			processFile( file, 'This', 'NEWTHAT' )
 				.then( processFile( file, 'NEWTHAT', 'ZIIAH' ) ) // what is the return value of the first promise?
@@ -107,6 +142,7 @@
 						proceedFile(content);
 					} );
 			}
+
 			/*
 			console.log("content of variable file: " + file);
 
