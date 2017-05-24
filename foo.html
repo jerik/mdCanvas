@@ -7,41 +7,61 @@
 			console.log( "jQuery " + (window.jQuery ? "success" : "failure"));
 
 			var filename = 'bar.txt';
-			//var fileProceeded;
 
 			// Based on https://stackoverflow.com/questions/35135110/jquery-ajax-with-es6-promises
+			// and http://www.sohamkamani.com/blog/2016/08/28/incremenal-tutorial-to-promises/
 			function ajax( options ) { 
 				return new Promise( function( resolve, reject ) { 
 					$.get( options ).done( resolve ).fail( reject );
 				});
 			}
 
-			var resolve = function ( data ) { 
-				var tmp = data.replace( 'This', 'FOOOOOO' );
-				console.log( "foo: ", tmp );
+			// not in use
+			// @todo how to make the function reuse-able
+			var loom = function( search, replace  ) { 
+				return { 
+					first: search,
+					second: replace
+				}
+			}
+			//var cf1 = ['This', 'CONFIG'];
+			var l = loom( 'This', 'VARIABLE'  );
+			var doResolve = function ( data ) { 
+				//var tmp = data.replace( cf1[0], cf1[1] );
+				var tmp = data.replace( l.first, l.second );
+				console.log( l.second, "foo:", tmp );
+				return tmp;
+			}
+
+			var doResolve2 = function( data, search, replace ) { 
+				var tmp = data.replace( search, replace );
+				console.log( replace, "foo:", tmp );
 				return tmp;
 			}
 
 			ajax( filename )
 				.then( 
-					function( data  ) {  // or resolve
+					/*function( data, mata = "foobar" ) {  // or doResolve
 						var tmp = data.replace( 'This', 'FOOOOOO' );
 						console.log( "1. resolve: ", tmp );
-						return tmp;
-					}, 
+						return tmp + mata;
+					},*/ 
+					// @todo How do I get the function parameterized ???
+					doResolve,
+					//doResolve2( data, 'This', 'Miss' ), // ReferenceError: data is not defined
 					function( data ) { // reject
 						console.log( "reject: ", data );
 					}
-				).catch( function( error ) { 
-					console.error( error )
-				// .catch( console.log.bind( console ) );
-				} )
+				)
 				.then(  // work on the first promise result
 					function( data ) { 
 						var tmp = data.replace( 'content', 'BAAAR' );
 						console.log( "2. resolve: ", tmp );
-					}
-				);
+				}
+				).catch( function( error ) { 
+					console.error( error )
+				// .catch( console.log.bind( console ) ); // try this
+				} );
 
 
 			/* @todo how to store the returned value!!!!
