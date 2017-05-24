@@ -7,20 +7,8 @@
 			console.log( "jQuery " + (window.jQuery ? "success" : "failure"));
 
 			var filename = 'bar.txt';
-			//var file = getFile(filename);
 			//var fileProceeded;
-			//getFileDerf(filename);
 
-			var file = getFileDerf(filename);
-
-
-			//proceedFile(getFileDerf(filename));
-				proceedFile(file);
-
-			var thatFile = procFile(file, 'This', 'THAT');
-			var whohayFile = procFile(thatFile, 'THAT', 'WHOHAY');
-
-			
 			// Based on https://stackoverflow.com/questions/35135110/jquery-ajax-with-es6-promises
 			function ajax( options ) { 
 				return new Promise( function( resolve, reject ) { 
@@ -46,6 +34,7 @@
 					}
 				).catch( function( error ) { 
 					console.error( error )
+				// .catch( console.log.bind( console ) );
 				} )
 				.then(  // work on the first promise result
 					function( data ) { 
@@ -55,100 +44,12 @@
 				);
 
 
-			// 20170523 
-			processFile( file, 'This', 'NEWTHAT' )
-				.then( processFile( file, 'NEWTHAT', 'ZIIAH' ) ) // what is the return value of the first promise?
-				.catch( console.log.bind( console ) );
-
-			// closure # is not executed
-			var proceedFileHooray = function(content) {
-				fileProceeded = file.replace('bar', 'FOO');
-				console.log("content of variable fileProceeded: " + tmp);
-			}
-
-			function getFileDerf(filename) {
-				return $.get( filename, function( data ) { 
-						//console.log( data );
-						//return data;
-						content = data;
-						console.log("getFileDerf: " + content);
-					}, 'text' );
-				// .done( function(  ) { alert( "success" ) } );
-				// .fail( function(  ) { alert( "fail" ) } );
-			}
-
-			/*
-			 // try to create a function that does the replace
-			 // does not work, in the second replacement. Need Promise
-			function proceedFile(futureFile) {
-				futureFile.done(function(result) {
-				 var tmp = result.replace('bar', 'FOO');
-					console.log(tmp);
-				});
-			}
-			*/
-
-			// workaround to do both replacement, put it in one function
-			function proceedFile(futureFile) {
-				// return new Promise(function(resolve, reject)) }
-				futureFile.done(function(result) {
-				 	var tmp = result.replace('bar', 'FOO');
-					console.log("First replace: " + tmp);
-				 	tmp = tmp.replace('FOO', 'BAR');
-					console.log("Second replace: " + tmp);
-					// return somehow  tmp	
-				});
-			}
-
-			// @todo how to store the returned value!!!!
-			// https://stackoverflow.com/questions/14220321/how-do-i-return-the-response-from-an-asynchronous-call
-			// http://www.danieldemmel.me/blog/2013/03/22/an-introduction-to-jquery-deferred-slash-promise/
-			// @todo 20170522 hier weitermachen!!! https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
-			// maybe: https://stackoverflow.com/questions/22710566/return-ajax-promises-result-with-jquery
-			// and: http://www.sohamkamani.com/blog/2016/08/28/incremenal-tutorial-to-promises/
-			// return new Promise(function(resolve, reject)) }
-			function procFile(file, search, replace) {
-				return file.done(function(result){
-					var tmp = result.replace(search, replace);
-					console.log(replace + ": " + tmp);
-				});
-			}
-
-			function processFile( file, search, replace ) { 
-				return new Promise( function( resolve, reject ) { 
-						file.done( function( result ) { 
-				 			var tmp = result.replace(search, replace);
-							console.log( "processFile: " + tmp );
-							resolve( result );
-						} );
-						file.fail( function(  ) { 
-							console.log( "ERROR processFile: " + tmp );
-							reject( result );
-						} )
-						// resolve( file.done )
-				} )
-			}
-
-
-			function getFile( filename ) { 
-
-				$.get( filename, function( data ) { 
-						//console.log( data );
-						//return data;
-						content = data;
-					}, 'text' )
-				.done( function(  ){ 
-						console.log('get.done: ' + content);
-						proceedFile(content);
-					} );
-			}
-
-			/*
-			console.log("content of variable file: " + file);
-
-			// work on the result of fileProceeded
-			file2 = fileProceeded.replace('FOO', 'BAR');
-			console.log("content of variable file2: " + file2)
+			/* @todo how to store the returned value!!!!
+			 https://stackoverflow.com/questions/14220321/how-do-i-return-the-response-from-an-asynchronous-call
+			 http://www.danieldemmel.me/blog/2013/03/22/an-introduction-to-jquery-deferred-slash-promise/
+			 @todo 20170522 hier weitermachen!!! https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
+			maybe: https://stackoverflow.com/questions/22710566/return-ajax-promises-result-with-jquery
+			and: http://www.sohamkamani.com/blog/2016/08/28/incremenal-tutorial-to-promises/
 			*/
 
 		}	
