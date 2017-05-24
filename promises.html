@@ -1,0 +1,81 @@
+<html>	
+	<head>
+	<title>promises</title>
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script>
+window.onload = function() {
+	console.log( "jQuery " + (window.jQuery ? "success" : "failure"));
+	// work on 
+	// http://www.sohamkamani.com/blog/2016/08/28/incremenal-tutorial-to-promises/
+
+	// var url = "http://www.google.com"; // throws an error
+	var url = "test.html"; // works
+
+	/*
+	 * Chapter 2
+	$.get( url, function( data ) { 
+		content = data, 
+		console.log( "processing" );
+	} )
+	.done( function(  ) { 
+		console.log( "done: " + content );
+	} )
+	.fail( function(  ) { 
+		console.error( "fail: error in $.get" );
+	} )
+	.always( function(  ) { 
+		console.log( "finished" );
+	} )
+	*/
+
+	// https://stackoverflow.com/questions/35135110/jquery-ajax-with-es6-promises
+	/*
+	$.get( url )
+		.done( function( data ) { 
+			console.log( data );
+		} );
+	*/
+
+	/*
+	function getPromise( ) { 
+		return new Promise( function( resolve, reject ) { 
+			$.get( "test.html")
+			.done( function( data ) { 
+				console.log( data );
+				} )
+			.fail( function( data ) { 
+				console.log( "fail: ", data );
+				} )
+			.always( function( data ) { 
+				console.log( "always: ", data );
+				} )
+		} );
+	}
+
+	getPromise(  );
+	*/
+
+	function ajax( options ) { 
+		return new Promise( function( resolve, reject ) { 
+			$.get( options ).done( resolve ).fail( reject );
+		});
+	}
+
+	//url = "http://google.com";
+	ajax( url )
+		.then( 
+			function( data  ) {  // resolve
+				console.log( "resolve: ", data );
+			},
+			function( data ) { // reject
+				console.log( "reject: ", data );
+			}
+		).catch( function( error ) { 
+			console.error( error )
+		} );
+}	
+	</script>
+	</head>
+	<body>
+	</body>
+</html>
