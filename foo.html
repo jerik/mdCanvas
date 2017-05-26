@@ -16,62 +16,54 @@
 				});
 			}
 
-			// not in use
-			// @todo how to make the function reuse-able
+			// to pass search and replace parameter into closure
 			var loom = function( search, replace  ) { 
 				return { 
-					first: search,
-					second: replace
+					search: search,
+					replace: replace
 				}
 			}
-			//var cf1 = ['This', 'CONFIG'];
+
 			var l = loom( 'This', 'VARIABLE'  );
 			var doResolve = function ( data ) { 
 				//var tmp = data.replace( cf1[0], cf1[1] );
-				var tmp = data.replace( l.first, l.second );
-				console.log( l.second, "foo:", tmp );
+				var tmp = data.replace( l.search, l.replace );
+				console.log( l.search, "doResolve :", tmp );
+				return tmp; // important for the second promise
+			}
+
+			var m = loom( 'content', 'OUTER RIM' );
+			var doResolveNow = function ( data ) { 
+				//var tmp = data.replace( cf1[0], cf1[1] );
+				var tmp = data.replace( m.search, m.replace );
+				console.log( m.search, "doResolveNow:", tmp );
 				return tmp;
 			}
 
-			var doResolve2 = function( data, search, replace ) { 
-				var tmp = data.replace( search, replace );
-				console.log( replace, "foo:", tmp );
-				return tmp;
+			var doReject = function( data ) { 
+				console.log( "Reject: ", data );
 			}
 
 			ajax( filename )
 				.then( 
-					/*function( data, mata = "foobar" ) {  // or doResolve
-						var tmp = data.replace( 'This', 'FOOOOOO' );
-						console.log( "1. resolve: ", tmp );
-						return tmp + mata;
-					},*/ 
-					// @todo How do I get the function parameterized ???
 					doResolve,
-					//doResolve2( data, 'This', 'Miss' ), // ReferenceError: data is not defined
-					function( data ) { // reject
-						console.log( "reject: ", data );
-					}
-				)
-				.then(  // work on the first promise result
-					function( data ) { 
+					/* function( data ) { 
 						var tmp = data.replace( 'content', 'BAAAR' );
 						console.log( "2. resolve: ", tmp );
-				}
+						return tmp;
+					}, */
+					doReject
+					/* function( data ) { // reject
+						console.log( "reject: ", data );
+					} */
+				)
+				.then(  // work on the first promise result
+					doResolveNow, 
+					doReject
 				).catch( function( error ) { 
-					console.error( error )
-				// .catch( console.log.bind( console ) ); // try this
+					console.error( "Catched: ", error )
 				} );
-
-
-			/* @todo how to store the returned value!!!!
-			 https://stackoverflow.com/questions/14220321/how-do-i-return-the-response-from-an-asynchronous-call
-			 http://www.danieldemmel.me/blog/2013/03/22/an-introduction-to-jquery-deferred-slash-promise/
-			 @todo 20170522 hier weitermachen!!! https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
-			maybe: https://stackoverflow.com/questions/22710566/return-ajax-promises-result-with-jquery
-			and: http://www.sohamkamani.com/blog/2016/08/28/incremenal-tutorial-to-promises/
-			*/
-
+				//.catch( console.error.bind( console ) ); // works as well
 		}	
 	</script>
 	</head>
