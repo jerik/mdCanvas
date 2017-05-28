@@ -13,25 +13,46 @@ export class main {
 			// windows.location.search.substring( 1 ) removes the ? from the parameters
 			var url = url || window.location.search.substring( 1 ); // get the test url or the real parameters
 			var filename = this.getFilenameFrom( url );
-			var fooOuter = "";
-			// @todo 20170428 does not work, but dig in into the article, see the Promisifying XMLHttpRequest --> See foo.html
+
 			// https://developers.google.com/web/fundamentals/getting-started/primers/promises
-			/*
-			var promise = new Promise(function(resolve, reject)) {
-			*/
-			//fooOuter = this.getFile( filename );
-			//this.getFilenameFrom(filename);
-			this.getFile(filename);
-		/*
-			if (fooOuter != "undefined") {
-				resolve(console.log("##### resolved"));
-			} else {
-				reject(Error("it broke"));
+			// old working version, but should be replaced
+			// this.getFile(filename);
+
+			var mdPath = filename + '.md';
+
+			var doResolve = function ( data ) { 
+				console.log( "doResolve :", data );
+				return data; // important for the next promise in chain
 			}
 
-		}
-		*/
-		console.log('fooOuoter: ' +fooOuter);
+			var doResolveNow = function ( data ) { 
+				console.log( "doResolveNow :", data );
+				return data; // important for the next promise in chain
+			}
+
+			var doReject = function( data ) { 
+				console.log( "Reject: ", data );
+			}
+
+			this.ajax( mdPath )
+				.then( 
+					doResolve,
+					/* function( data ) { 
+						var tmp = data.replace( 'content', 'BAAAR' );
+						console.log( "2. resolve: ", tmp );
+						return tmp;
+					}, */
+					doReject
+					/* function( data ) { // reject
+						console.log( "reject: ", data );
+					} */
+				)
+				.then(  // work on the first promise result
+					doResolveNow, 
+					doReject
+				).catch( function( error ) { 
+					console.error( "Catched: ", error )
+				} );
 	}
 
 	getUrlParams( url ) {  // parameter is for testing purpose
@@ -64,6 +85,13 @@ export class main {
 		//return getUrlParameter( 'md', currentUrl ) || 'mdCanvas';
 		return getUrlParameter( 'md', urlParams ) || 'mdCanvas';
 	}
+	
+	// try promises from foo.html
+	ajax( options ) { 
+		return new Promise( function( resolve, reject ) { 
+			$.get( options ).done( resolve ).fail( reject );
+		});
+	}
 
 	/* 
 	 * parse(  ) { 
@@ -83,12 +111,15 @@ export class main {
 		// http://javascriptissexy.com/understand-javascript-closures-with-ease/
 		// https://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
 		var foobar = "";
+
+		// @todo need to merge
 		var parse = function(content) {
 			// console.log("do the parsing on: " + content)
 			foobar = "parse";
 			getSections(content);
 		}
 
+		// @todo need to merge
 		var getSections = function( content ) { 
 			if ( content == undefined ) { 
 				return new Error( "Missing parameter 'content'" );
@@ -109,6 +140,7 @@ export class main {
 		}
 
 		// @todo 20170426 create dataObject 
+		// @todo need to merge
 		var getHeading = function( parts ) { 
 			var heading = parts.slice( 0, parts.indexOf("\n" ));
 			console.log( 'Heading: ' + heading );
@@ -118,12 +150,14 @@ export class main {
 			// @todo bastel object with heading and content: { mdc-costs: "this is the \n text of the box" }
 		}
 
+		// @todo need to merge
 		var buildData = function(parts) {
 			foobar = "buildData";
 			getHeading(parts);
 
 		}
 
+		// @todo can be removed obsolet
 		$.get( pathmd, function( data ) { 
 			//console.log( data );
 			//return data;
