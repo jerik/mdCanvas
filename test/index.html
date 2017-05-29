@@ -36,6 +36,7 @@
 	  <script type="text/javascript" charset="utf-8">
 		SystemJS.import('../js/modules/mdCanvas.js').then( function( qob ) { 
 	  	
+			// assign the module class to the variable: use
 			var use = new qob.main;
 			// console.log( new qob.main(  ).say );
 			// console.log( use.say );
@@ -66,26 +67,44 @@
 			} );
 			*/
 
-			QUnit.test( 'parseSections - split file in sections for the canvas boxes', function( assert ) { 
-					var content = "# Canvas \n#Section";
-					assert.ok( Array.isArray(use.parseSections( content )), 'Return value is an array' );
-					assert.ok( use.parseSections( content ), 'There are sections' );
-					assert.ok( use.parseSections( ) instanceof Error, 'There is missing content. Error thrown' );
-					assert.ok( use.parseSections( 'no sections' ).length == 1, 'There are no sections' );
-					content = content + "\n some more \nlines of text\n does this work?";
-					assert.ok( use.parseSections( content ), 'There are sections' );
+			QUnit.test( 'getSections - split file in sections for the canvas boxes', function( assert ) { 
+				var content = "# Canvas \n#Section";
+				assert.ok( Array.isArray(use.getSections( content )), 'Return value is an array' );
+				assert.ok( use.getSections( content ), 'There are sections' );
+				assert.ok( use.getSections( ) instanceof Error, 'There is missing content. Error thrown' );
+				assert.ok( use.getSections( 'no sections' ).length == 1, 'There are no sections' );
+				content = content + "\n some more \nlines of text\n does this work?";
+				assert.ok( use.getSections( content ), 'There are sections' );
 			} )
 
-			QUnit.test( 'getHeadings - get headings for the canvas boxes', function( assert ) { 
-					var content = "# Canvas \n"; // "#Section \nThis is a description\nof the section foo.";
-					assert.ok( use.getHeading( content ), 'There is a heading' );
-					assert.ok( (typeof use.getHeading( content ) === "string"), 'Heading is a string' );
-					/** makes no sense to test that
-					 * assert.ok( use.getHeading( content ).indexOf( '#' ) != -1, 'Heading contains a hash ( # )' );
-					 *assert.ok( use.getHeading( content.substr( 1 ) ).indexOf( '#' ) == -1, 'Heading contains a NO hash ( # )' );
-					 *assert.ok( use.getHeading( '#' + content ).indexOf( '#' ) != -1, 'Heading contains a hash ( # )' );
-					 *assert.ok( use.getHeading( '##' + content ).indexOf( '#' ) != -1, 'Heading contains a hash ( # )' );
-					 */
+			QUnit.test( 'getHeader - get heading for the canvas', function( assert ) { 
+				var content = "# Canvas \n Lean Canvas"; // "#Section \nThis is a description\nof the section foo.";
+				assert.ok( use.getHeader( content ), 'There is a heading' );
+				assert.ok( (typeof use.getHeader( content ) === "string"), 'Heading is a string' );
+				/** makes no sense to test that
+				 * assert.ok( use.getHeading( content ).indexOf( '#' ) != -1, 'Heading contains a hash ( # )' );
+				 *assert.ok( use.getHeading( content.substr( 1 ) ).indexOf( '#' ) == -1, 'Heading contains a NO hash ( # )' );
+				 *assert.ok( use.getHeading( '#' + content ).indexOf( '#' ) != -1, 'Heading contains a hash ( # )' );
+				 *assert.ok( use.getHeading( '##' + content ).indexOf( '#' ) != -1, 'Heading contains a hash ( # )' );
+				 */
+			} )
+
+			QUnit.test( 'getBox - get content for the canvas boxes', function( assert ) { 
+				var content = " Problem \n 1. First Problem\n2. Problem"; // "#Section \nThis is a description\nof the section foo.";
+				// https://stackoverflow.com/questions/8511281/check-if-a-value-is-an-object-in-javascript
+				// https://stackoverflow.com/a/13356338/1933185
+				assert.ok( Object.prototype.toString.call(use.getBox( content )) === "[object Object]", 'There is an object' );
+				assert.ok( use.getBox( content, 1 ).hasOwnProperty( 'name' ), 'There is an property called name' );
+				assert.ok( use.getBox( content, 1 ).name  == "Problem", 'Property name = Problem' );
+				assert.ok( use.getBox( content, 1 ).hasOwnProperty( 'content' ), 'There is an property called content' );
+				//console.log( 'substring', use.getBox( content, 1 ).content.substring( 0, 10 ) );
+				assert.ok( use.getBox( content, 1 ).content.substring( 0, 11 )  == "### Problem", 'Property content starts with "### Problem"' );
+				/** makes no sense to test that
+				 * assert.ok( use.getHeading( content ).indexOf( '#' ) != -1, 'Heading contains a hash ( # )' );
+				 *assert.ok( use.getHeading( content.substr( 1 ) ).indexOf( '#' ) == -1, 'Heading contains a NO hash ( # )' );
+				 *assert.ok( use.getHeading( '#' + content ).indexOf( '#' ) != -1, 'Heading contains a hash ( # )' );
+				 *assert.ok( use.getHeading( '##' + content ).indexOf( '#' ) != -1, 'Heading contains a hash ( # )' );
+				 */
 			} )
 
 

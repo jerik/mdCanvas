@@ -142,12 +142,15 @@ export class main {
 	getHeader(element) {
 		let heading = element.split("\n")[1].trim(); // used let, get the 2 part of the element
 		this.canvas.heading = heading;
+		return this.canvas.heading;
 	}
 
 	getBox(element, index) {
 		let section = element.split("\n");
 		// @todo does the content contain the linebraeks? Otherwise I have to use another way
-		this.canvas['box' + index]  = { name: section[0].trim(), content: '###' + element}
+		let item = 'box' + index;
+		this.canvas[item]  = { name: section[0].trim(), content: '###' + element}
+		return this.canvas[item];
 
 		// http://2ality.com/2014/08/es6-today.html
 	}
