@@ -3,7 +3,7 @@ export class main {
 	constructor(  ) { 
 		this.init(  );
 		this.say = "This is a es6 main test module.";
-		this.canvas = { first: "item" }
+		this.canvas = {}; // empty object, will be filled with content from markdown
 	}
 
 	// for integration tests 
@@ -101,14 +101,26 @@ export class main {
 	 * 	 getFile(  ) { this.contentFile }
 	 * 	 getSections(  ) {  } // aka parseSections
 	 * 	 getHeading(  ) {  this.contentObj }
+	 * 	 getBox()
 	 * 	 ...
 	 * }
 	 */
 	parse( content ) { 
 		// run parse
 		var parts = this.getSections(content);
-		var heading = this.getHeading( parts );
+
+		parts.forEach((element, index) => {
+			if (index == 0) {
+				this.getHeader(element);
+			} else {
+				this.getBox(element, index);
+			}
+
+			//console.log(index, element);
+		})
+
 		console.log( this.canvas );
+		//console.log(Object.keys(this.canvas));
 	}
 
 	getSections( content ) { 
@@ -123,17 +135,21 @@ export class main {
 				parts.shift(  );
 			}
 		}
-		console.log( "THIS Parts: ", parts );
+		//console.log( "THIS Parts: ", parts );
 		return parts;
-		//this.getHeading( parts );
 	}
 
-	getHeading( parts ) { 
-		var heading = parts.slice( 0, parts.indexOf("\n" ));
-		console.log( 'HEading: ' + heading );
-		return heading;
+	getHeader(element) {
+		let heading = element.split("\n")[1].trim(); // used let, get the 2 part of the element
+		this.canvas.heading = heading;
+	}
 
-		// @todo bastel object with heading and content: { mdc-costs: "this is the \n text of the box" }
+	getBox(element, index) {
+		let section = element.split("\n");
+		// @todo does the content contain the linebraeks? Otherwise I have to use another way
+		this.canvas['box' + index]  = { name: section[0].trim(), content: '###' + element}
+
 		// http://2ality.com/2014/08/es6-today.html
 	}
+
 }
