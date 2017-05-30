@@ -8,8 +8,26 @@
 	<style type="text/css" media="screen">
 	  body { 
 	  	font-family: arial;
+		font-size: 1.0em;
 	  }
+
+	  h3 {
+		  margin-top:3px;
+		  /* margin-bottom:3px;
+		  padding-bottom:0; */
+	  }
+
+	  h1 {
+		  margin-bottom: 0px;
+	  }
+	  #hypothesis {
+		  margin-top: 2px;
+		  font-size: 1.2em;
+		  font-style: italic;
+	  }
+
 	  /* Testing grids */
+	  /* @todo not working on Safari and IE */
 	  .containerbox { 
 	    height: 80%; /* 80vh, does not scale if the content is bigger than the box */
 	    display: grid;
@@ -32,8 +50,8 @@
 	  #mdc-todo { background-color:tomato; }
 	  
 	  .box { 
-	  	font-size: 1.2em;
 	  	min-height: 120px;
+		padding-left: 3px;
 	  }
 
 	  .problem { 
@@ -86,6 +104,23 @@
 	  	grid-row: 4 / 5; 
 	  }
 
+	  /* https://www.w3schools.com/howto/howto_css_loader.asp */
+	  /* @todo not working on Safari */
+	  .loader {
+			float:left;
+			border: 6px solid #f3f3f3; /* Light grey */
+			border-top: 6px solid #3498db; /* Blue */
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+			animation: spin 2s linear infinite;
+		}
+
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+
 	</style>
 	
 	<script src="js/systemjs/dist/system.js"></script>
@@ -108,19 +143,19 @@
 	</script>
 </head>
 <body>
-  <h1 id="mdc-canvas">mdCanvas</h1>
+<h1 id="mdc-canvas"><div class="loader"></div><span style="padding-left:7px">Loading canvas</span></h1>
+  <p id="hypothesis">Hypothesis</p>
   <div class="containerbox">
-    <div id="mdc-problem" class="box problem">problem</div>
-	<div id="mdc-solution" class="box solution">solution</div>
-	<div id="mdc-key-metrics" class="box key-metrics">key metrics</div>
-    <div id="mdc-unique-value-proposition" class="box unique-value-proposition">unique-value-proposition</div>
-	<div id="mdc-unfair-advantage" class="box unfair-advantage">unfair advantage</div>
-	<div id="mdc-channels" class="box channels">channels</div>
-	<div id="mdc-customer-segment" class="box customer-segment">customer-segment</div>
-    <div id="mdc-cost-structure" class="box cost-structure">cost-structure</div>
-    <div id="mdc-revenue-stream" class="box revenue-stream">revenue-stream</div>
-  	<div id="mdc-todo" class="box todo">ti-to-do
-		Lorem ipsum dolor sit amet</div>
+    <div id="mdc-problem" class="box problem">Problem</div>
+	<div id="mdc-solution" class="box solution">Solution</div>
+	<div id="mdc-key-metrics" class="box key-metrics">Key metrics</div>
+    <div id="mdc-unique-value-proposition" class="box unique-value-proposition">Unique-value-proposition</div>
+	<div id="mdc-unfair-advantage" class="box unfair-advantage">Unfair advantage</div>
+	<div id="mdc-channels" class="box channels">Channels</div>
+	<div id="mdc-customer-segment" class="box customer-segment">Customer-segment</div>
+    <div id="mdc-cost-structure" class="box cost-structure">Cost-structure</div>
+    <div id="mdc-revenue-stream" class="box revenue-stream">Revenue-stream</div>
+  	<div id="mdc-todo" class="box todo">Todo</div>
   </div>
 </body>
 </html>

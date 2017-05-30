@@ -1,5 +1,5 @@
-# Canvas
-Lean Canvas
+# Lean Canvas
+This is my hypothesis for this canvas
 
 # Problem
 1. Top problem

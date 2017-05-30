@@ -141,8 +141,10 @@ export class main {
 	}
 
 	getHeader(element) {
-		let heading = element.split("\n")[1].trim(); // used let, get the 2 part of the element
-		this.canvas.heading = heading;
+		//let heading = element.split("\n")[1].trim(); // used let, get the 2 part of the element
+		//this.canvas.heading = heading;
+		let heading = element.split("\n"); // used let, get the 2 part of the element
+		this.canvas.type = {name: heading[0].trim(), hypothesis: heading[1]}
 		return this.canvas.heading; // needed for Qunit
 	}
 
@@ -163,8 +165,9 @@ export class main {
 		// https://stackoverflow.com/a/29933940/1933185
 		// Object.keys(canvas).forEach(function(key) {
 		Object.keys(canvas).forEach((key) => { 
-			if (key == "heading") {
-				$('#mdc-canvas').html(canvas[key]);
+			if (key == "type") {
+				$('#mdc-canvas').html(canvas[key].name);
+				$('#hypothesis').html(canvas[key].hypothesis);
 			} else {
 				let box = canvas[key];
 				let tagid = '#mdc-' + canvas[key].name.toLowerCase();
