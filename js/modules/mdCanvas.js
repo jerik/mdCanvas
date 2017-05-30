@@ -169,7 +169,9 @@ export class main {
 				let box = canvas[key];
 				let tagid = '#mdc-' + canvas[key].name.toLowerCase();
 				//console.log(tagid);
-				$(tagid).html(box.content);
+				var sdown = new showdown.Converter(  ), text = box.content, html = sdown.makeHtml( text );
+				$(tagid).html(html);
+				//$(tagid).html(box.content);
 			}
 			console.log(key, canvas[key]);
 		}) 

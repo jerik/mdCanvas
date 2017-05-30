@@ -89,8 +89,10 @@
 	</style>
 	
 	<script src="js/systemjs/dist/system.js"></script>
+  	<script src="https://cdn.rawgit.com/showdownjs/showdown/1.4.2/dist/showdown.min.js"></script>
 	<script>
 		SystemJS.import('https://code.jquery.com/jquery.js');
+  		/* SystemJS.import('https://cdn.rawgit.com/showdownjs/showdown/1.4.2/dist/showdown.min.js'); */ // @todo how to integrate this correctly and avoid the script tag?
 
 		SystemJS.config({
 		  map: {
