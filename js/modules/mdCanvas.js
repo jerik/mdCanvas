@@ -18,14 +18,15 @@ export class main {
 		var mdPath = filename + '.md';
 
 		// resolve function 
-		var doResolve = function ( data ) { 
-			console.log( "doResolve :", data );
+		var doParse = ( data ) => { 
+			this.parse( data );
+			//console.log( "doResolve :", data );
 			return data; // important for the next promise in chain
 		}
 
 		// https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Functions/Pfeilfunktionen
-		var doResolveNow = ( data ) => {  // doResolveNow should be doResolve !!
-			this.parse( data );
+		var doShow = ( data ) => {  // doResolveNow should be doResolve !!
+			this.show();
 			// console.log( "doResolveNow :", data );
 			return data; // important for the next promise in chain
 		}
@@ -36,7 +37,7 @@ export class main {
 
 		this.ajax( mdPath )
 			.then( 
-				doResolve,
+				doParse,
 				/* function( data ) { 
 					var tmp = data.replace( 'content', 'BAAAR' );
 					console.log( "2. resolve: ", tmp );
@@ -48,7 +49,7 @@ export class main {
 				} */
 			)
 			.then(  // work on the first promise result
-				doResolveNow, 
+				doShow, 
 				doReject
 			).catch( function( error ) { 
 				console.error( "Catched: ", error )
@@ -119,7 +120,7 @@ export class main {
 			//console.log(index, element);
 		})
 
-		console.log( this.canvas );
+		//console.log( this.canvas );
 		//console.log(Object.keys(this.canvas));
 	}
 
@@ -142,7 +143,7 @@ export class main {
 	getHeader(element) {
 		let heading = element.split("\n")[1].trim(); // used let, get the 2 part of the element
 		this.canvas.heading = heading;
-		return this.canvas.heading;
+		return this.canvas.heading; // needed for Qunit
 	}
 
 	getBox(element, index) {
@@ -150,9 +151,28 @@ export class main {
 		// @todo does the content contain the linebraeks? Otherwise I have to use another way
 		let item = 'box' + index;
 		this.canvas[item]  = { name: section[0].trim(), content: '###' + element}
-		return this.canvas[item];
+		return this.canvas[item]; // needed for Qunit
 
 		// http://2ality.com/2014/08/es6-today.html
+	}
+
+	show() {
+		console.log('show', this.canvas);
+		let canvas = this.canvas;
+
+		// https://stackoverflow.com/a/29933940/1933185
+		// Object.keys(canvas).forEach(function(key) {
+		Object.keys(canvas).forEach((key) => { 
+			if (key == "heading") {
+				$('#mdc-canvas').html(canvas[key]);
+			} else {
+				let box = canvas[key];
+				let tagid = '#mdc-' + canvas[key].name.toLowerCase();
+				//console.log(tagid);
+				$(tagid).html(box.content);
+			}
+			console.log(key, canvas[key]);
+		}) 
 	}
 
 }
