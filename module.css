@@ -1,0 +1,114 @@
+body { 
+	font-family: arial;
+  font-size: 1.0em;
+}
+
+h3 {
+    margin-top:3px;
+    /* margin-bottom:3px;
+    padding-bottom:0; */
+}
+
+h1 {
+    margin-bottom: 0px;
+}
+#hypothesis {
+    margin-top: 2px;
+    font-size: 1.2em;
+    font-style: italic;
+}
+
+/* Testing grids */
+/* @todo not working on Safari and IE */
+.containerbox { 
+  height: 80%; /* 80vh, does not scale if the content is bigger than the box */
+  display: grid;
+  grid-template-rows: 30% 30% 30% 10%;
+  grid-template-columns: 16.6% 16.6% 8.4% 8.4% 16.6% 16.6%;
+  grid-auto-flow: row;
+  grid-row-gap: 2px;
+  grid-column-gap: 2px;
+}
+
+#mdc-problem { background-color:#a7e43a; }
+#mdc-solution { background-color:#e43a74; }
+#mdc-key-metrics { background-color:#00e4a8; }
+#mdc-unique-value-proposition { background-color:#ade477; }
+#mdc-unfair-advantage { background-color:#73443a; }
+#mdc-channels { background-color:gray; }
+#mdc-customer-segment { background-color:#0000ff; }
+#mdc-cost-structure { background-color:#a7043a; }
+#mdc-revenue-stream { background-color:#f70430; }
+#mdc-todo { background-color:tomato; }
+
+.box { 
+	min-height: 120px;
+  padding-left: 3px;
+}
+
+.problem { 
+	grid-column: 1 / 2; 
+	grid-row: 1 / 3; 
+}
+
+.solution { 
+	grid-column: 2 / 3; 
+	grid-row: 1 / 2; 
+}
+
+.key-metrics { 
+	grid-column: 2 / 3; 
+	grid-row: 2 / 3; 
+}
+
+.unique-value-proposition { 
+	grid-column: 3 / 5; 
+	grid-row: 1 / 3; 
+}
+
+.unfair-advantage { 
+	grid-column: 5 / 6; 
+	grid-row: 1 / 2; 
+}
+
+.channels { 
+	grid-column: 5 / 6; 
+	grid-row: 2 / 3; 
+}
+
+.customer-segment { 
+	grid-column: 6 / 7; 
+	grid-row: 1 / 3; 
+}
+
+.cost-structure { 
+	grid-column: 1 / 4; 
+	grid-row: 3 / 4; 
+}
+
+.revenue-stream { 
+	grid-column: 4 / 7; 
+	grid-row: 3 / 4; 
+}
+
+.todo { /* @todo should this be part of the grid? */
+	grid-column: 1 / 7; 
+	grid-row: 4 / 5; 
+}
+
+  /* https://www.w3schools.com/howto/howto_css_loader.asp */
+  /* @todo not working on Safari */
+.loader {
+	float:left;
+	border: 6px solid #f3f3f3; /* Light grey */
+	border-top: 6px solid #3498db; /* Blue */
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
