@@ -24,10 +24,13 @@
 		SystemJS.import('./js/modules/mdCanvas.js').then( function( message ) { 
 				console.log( new message.main(  ).say );
 		} );
+		SystemJS.import('./js/modules/sidebar.js').then( function( message ) { 
+				console.log( new message.sidebar(  ).say );
+		} );
 	</script>
 </head>
 <body>
-  <!-- integrate sidebar -->
+  <!-- @todo integrate sidebar -->
   <div id="sidebar">
   <a id="toggler" onclick=" ">&raquo;</a>
 	  <ul id="link" style="display:none">

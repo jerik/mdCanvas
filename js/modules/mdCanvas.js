@@ -1,9 +1,9 @@
 export class main { 
 
 	constructor(  ) { 
+		this.canvas = {}; // empty object, will be filled with content from markdown
 		this.init(  );
 		this.say = "This is a es6 main test module.";
-		this.canvas = {}; // empty object, will be filled with content from markdown
 	}
 
 	// for integration tests 
