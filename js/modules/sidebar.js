@@ -1,9 +1,12 @@
 export class sidebar { 
 
 	constructor(  ) { 
+		// could be used, to show only the available files, if no url-param, the show the first file
 		this.mdfiles = [];
 		this.init(  );
 		this.say = "This is the sidebar module.";
+		//this.remove();
+		this.status();
 	}
 
 	init() {
@@ -36,7 +39,9 @@ export class sidebar {
 
 			})
 
-			//this.mdfiles[1] = 2;
+			//console.log(this.mdfiles);
+			// clean array that it only has relevant mdfiles 
+			this.mdfiles = this.cleanFiles(this.mdfiles);
 			console.log(this.mdfiles);
 			return this.mdfiles; // for the next promise, if there is one
 		}
@@ -53,6 +58,77 @@ export class sidebar {
 	ajax( options ) { 
 		return new Promise( function( resolve, reject ) { 
 			$.get( options ).done( resolve ).fail( reject );
+		});
+	}
+
+	/* @todo WIP integrated sidebar functionality (copy paste)
+	 * not sure if this works as I think
+	 */
+
+	// @todo how to refactor this better
+	cleanFiles(mdfiles) {
+		let files = $.map(mdfiles, function(n) {
+			return ((/readme/i).test(n) ? null : n);
+		});
+		return files;
+	}
+
+	remove() {
+		$('#sidebar').remove();
+	}
+	
+	// Closure: http://javascriptissexy.com/understand-javascript-closures-with-ease/
+	state(  ) { 
+		const stateClose = 'close'; 
+		const stateOpen = 'open';
+
+		return {  
+
+			open:  function(  ) { 
+			   $( '#sidebar' ).css( 'width', 200 );
+			   $( '#toggler' ).html( '&laquo;' );
+			   $( '#link' ).css( 'display', 'inline');
+			   this.setState( stateOpen );
+			},
+
+			close: function (  ) { 
+			   $( '#sidebar' ).css( 'width', 29 );
+			   $( '#toggler' ).html( '&raquo;' );
+			   $( '#link' ).css( 'display', 'none');
+			   this.setState( stateClose );
+		   	},
+
+			setState: function ( setState ) { 
+				if ( setState == stateOpen ) {  
+					// if there will be more localStorage action, create a object for it
+					// that do formal checks, if storage available, etc
+					localStorage.setItem( 'stateSidebar', stateOpen );
+				} else {  
+					// this has the advantage that a new loaded page and a closed sidebar have the same state
+					localStorage.removeItem( 'stateSidebar' ); // value is null
+				}
+			}, 
+			
+			getState: function(  ) {
+				return localStorage.getItem( 'stateSidebar' );
+		    },
+
+			toggle: function(  ) { 
+				if ( this.getState(  ) == stateOpen ) { 
+					this.close(  );
+				} else { 
+					this.open(  );
+				}
+			}
+		}
+	}
+
+	status() {
+		$(document).on('click', '#toggler', function() {
+			// @todo how can I trigger the this.state() funktion
+			// or create this, perhaps inside this function?
+			var nsiba = this.state();
+			nsiba.toggle();
 		});
 	}
 }
