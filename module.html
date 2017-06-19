@@ -22,10 +22,10 @@
 		});
 
 		SystemJS.import('./js/modules/mdCanvas.js').then( function( message ) { 
-				console.log( new message.main(  ).say );
+			console.log( new message.main(  ).say );
 		} );
 		SystemJS.import('./js/modules/sidebar.js').then( function( message ) { 
-				console.log( new message.sidebar(  ).say );
+			console.log( new message.sidebar(  ).say );
 		} );
 	</script>
 </head>
@@ -50,5 +50,12 @@
     <div id="mdc-revenue-stream" class="box revenue-stream">Revenue-stream</div>
   	<div id="mdc-todo" class="box todo">Todo</div>
   </div>
+  <!-- @todo load html2canvas with SzstemJS, create a button to take the screenshot, and save it somewhere for download or print -->
+  <script type="text/javascript" src="./js/html2canvas/html2canvas.js"></script>
+  <script type="text/javascript">
+  	html2canvas(document.body).then(function(canvas) {
+   		document.body.appendChild(canvas);
+ 	});
+  </script>
 </body>
 </html>
