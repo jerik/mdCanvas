@@ -25,7 +25,7 @@ export class main {
 		}
 
 		// https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Functions/Pfeilfunktionen
-		var doShow = ( data ) => {  // doResolveNow should be doResolve !!
+		var doShow = ( data ) => {  
 			this.show();
 			// console.log( "doResolveNow :", data );
 			return data; // important for the next promise in chain

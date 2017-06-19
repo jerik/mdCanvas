@@ -42,16 +42,41 @@ export class sidebar {
 			//console.log(this.mdfiles);
 			// clean array that it only has relevant mdfiles 
 			this.mdfiles = this.cleanFiles(this.mdfiles);
+			this.remove(this.mdfiles);
 			console.log(this.mdfiles);
 			return this.mdfiles; // for the next promise, if there is one
 		}
 
+		var doPopulate = (mdfiles) => {
+			this.populateSidebar(mdfiles);
+		}
+
+		var doReject = function( data ) { 
+			console.log( "Reject: ", data );
+		}
+
 		this.ajax( "." )
 			.then( 
-				doParse
-				// @todo , doReject
-				
-			); // @todo, doFail
+				doParse,
+				doReject
+			) 
+			.then(  
+				doPopulate, 
+				doReject
+			).catch( function( error ) { 
+				console.error( "Catched: ", error )
+			} );
+	}
+
+	populateSidebar(mdfiles) {
+		// console.log( "lets do the", mdfiles);
+		$.each( mdfiles, function( key, value ) { 
+			console.log( value );
+			var li = $( '<li>' ).appendTo( '#link' );
+			var name = value.slice( 0,-3 );
+			// $( '<a>', { text: value, href: '?md=' + value.slice( 0,-3 ) } ).appendTo( '#link' );
+			$( '<a>', { text: name, href: '?md=' + name } ).appendTo( li );
+		});
 	}
 
 	// @todo NON dry, this is the same function in mdCanvas.js, perhaps source out?
@@ -73,8 +98,13 @@ export class sidebar {
 		return files;
 	}
 
-	remove() {
-		$('#sidebar').remove();
+	remove(mdfiles) {
+		if (mdfiles.length < 2) {
+			$('#sidebar').remove();
+		}
+		if (mdfiles.length == 0) {
+			$('#mdc-canvas').html("No 'mdCanvas.md' file available");
+		}
 	}
 	
 	// Closure: http://javascriptissexy.com/understand-javascript-closures-with-ease/
@@ -107,9 +137,12 @@ export class sidebar {
 					// this has the advantage that a new loaded page and a closed sidebar have the same state
 					localStorage.removeItem( 'stateSidebar' ); // value is null
 				}
+
+				console.log("sidebar state is now", setState);
 			}, 
 			
 			getState: function(  ) {
+				console.log("current state is now", localStorage.getItem('stateSidebar'));
 				return localStorage.getItem( 'stateSidebar' );
 		    },
 
@@ -119,15 +152,21 @@ export class sidebar {
 				} else { 
 					this.open(  );
 				}
+			}, 
+
+			start: function( ) {
+				if ( this.getState() == stateOpen ) {
+					this.open( );
+				}
 			}
 		}
 	}
 
 	status() {
+		var self = this;
+		this.state().start();
 		$(document).on('click', '#toggler', function() {
-			// @todo how can I trigger the this.state() funktion
-			// or create this, perhaps inside this function?
-			var nsiba = this.state();
+			var nsiba = self.state();
 			nsiba.toggle();
 		});
 	}
