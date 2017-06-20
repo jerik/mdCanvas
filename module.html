@@ -30,32 +30,40 @@
 	</script>
 </head>
 <body>
-  <!-- @todo integrate sidebar -->
-  <h1 id="mdc-canvas"><div class="loader"></div><span style="padding-left:7px">Loading canvas</span></h1>
-  <p id="hypothesis">Hypothesis</p>
+  <!-- @todo sidebar must be one whole column on the right side -->
   <div id="sidebar">
-  <a id="toggler" onclick=" ">&raquo;</a>
-	  <ul id="link" style="display:none">
-	  </ul>
+	  <button id="takephoto">Camera</button>
+  	  <a id="toggler" onclick=" ">&raquo;</a>
+	  <ul id="link" style="display:none"></ul>
   </div>
-  <div class="containerbox">
-    <div id="mdc-problem" class="box problem">Problem</div>
-	<div id="mdc-solution" class="box solution">Solution</div>
-	<div id="mdc-key-metrics" class="box key-metrics">Key metrics</div>
-    <div id="mdc-unique-value-proposition" class="box unique-value-proposition">Unique-value-proposition</div>
-	<div id="mdc-unfair-advantage" class="box unfair-advantage">Unfair advantage</div>
-	<div id="mdc-channels" class="box channels">Channels</div>
-	<div id="mdc-customer-segment" class="box customer-segment">Customer-segment</div>
-    <div id="mdc-cost-structure" class="box cost-structure">Cost-structure</div>
-    <div id="mdc-revenue-stream" class="box revenue-stream">Revenue-stream</div>
-  	<div id="mdc-todo" class="box todo">Todo</div>
+  <div id="canvasbox">
+	  <h1 id="mdc-canvas"><div class="loader"></div><span style="padding-left:7px">Loading canvas</span></h1>
+	  <p id="hypothesis">Hypothesis</p>
+	  <div class="containerbox">
+		  <div id="mdc-problem" class="box problem">Problem</div>
+		  <div id="mdc-solution" class="box solution">Solution</div>
+		  <div id="mdc-key-metrics" class="box key-metrics">Key metrics</div>
+		  <div id="mdc-unique-value-proposition" class="box unique-value-proposition">Unique-value-proposition</div>
+		  <div id="mdc-unfair-advantage" class="box unfair-advantage">Unfair advantage</div>
+		  <div id="mdc-channels" class="box channels">Channels</div>
+		  <div id="mdc-customer-segment" class="box customer-segment">Customer-segment</div>
+		  <div id="mdc-cost-structure" class="box cost-structure">Cost-structure</div>
+		  <div id="mdc-revenue-stream" class="box revenue-stream">Revenue-stream</div>
+		  <div id="mdc-todo" class="box todo">Todo</div>
+	  </div>
   </div>
+  
   <!-- @todo load html2canvas with SzstemJS, create a button to take the screenshot, and save it somewhere for download or print -->
+  <!-- @todo jquery is two time loaded, reduce this to one time -->
+  <script src="https://code.jquery.com/jquery.js"></script>
   <script type="text/javascript" src="./js/html2canvas/html2canvas.js"></script>
   <script type="text/javascript">
-  	html2canvas(document.body).then(function(canvas) {
-   		document.body.appendChild(canvas);
- 	});
+	/* @todo open up png as print dialog, or save as pdf */
+		$(document).on('click', '#takephoto', function() {
+			html2canvas(document.body).then(function(canvas) {
+				document.body.appendChild(canvas);
+			});
+		});
   </script>
 </body>
 </html>
