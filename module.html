@@ -60,8 +60,14 @@
   <script type="text/javascript">
 	/* @todo open up png as print dialog, or save as pdf */
 		$(document).on('click', '#takephoto', function() {
-			html2canvas(document.body).then(function(canvas) {
-				document.body.appendChild(canvas);
+			//let canvasbox = document.getElementById("canvasbox");
+			let canvasbox = $("#canvasbox");
+			html2canvas(canvasbox).then(function(canvas) {
+				let printWindow = window.open();
+				let img = canvas.toDataURL("image/png");
+				//let url = canvas.toDataURL();
+				printWindow.document.write('<html><style type="text/css" media="print">button {display:none; }</style><body><img src="' + url + '" ><button onclick="window.print()" style="margin-right:100px">print</button><span>Powered by <a href="https://github.com/jerik/mdCanvas">mdCanvas</a></span></body></html>');
+				//printWindow.document.body.appendChild(canvas);
 			});
 		});
   </script>
