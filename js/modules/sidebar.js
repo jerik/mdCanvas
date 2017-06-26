@@ -116,14 +116,14 @@ export class sidebar {
 
 			open:  function(  ) { 
 			   $( '#sidebar' ).css( 'width', 200 );
-			   $( '#toggler' ).html( '&laquo;' );
+			   // $( '#toggler' ).html( '&laquo;' ); // changed button, not needed anymore
 			   $( '#link' ).css( 'display', 'inline');
 			   this.setState( stateOpen );
 			},
 
 			close: function (  ) { 
-			   $( '#sidebar' ).css( 'width', 29 );
-			   $( '#toggler' ).html( '&raquo;' );
+			   $( '#sidebar' ).css( 'width', 45 ); // @todo should be the same size at the initial closed sidebar
+			   // $( '#toggler' ).html( '&raquo;' ); // changed button, not needed anymore
 			   $( '#link' ).css( 'display', 'none');
 			   this.setState( stateClose );
 		   	},

@@ -117,14 +117,14 @@ h1 {
 /* Toggle Sidebar */
 #sidebar { 
 	/*background-color: aliceblue; */
-	height: 100%; 
+	height: 800px; 
 	float: left; 
-	width: 32px; 
+	width: 45px; /* should be wider then sidebuttons */
 	/* display: none; */
 }
 
 /* button */
-#toggler { 
+#toggler.old { 
 	width: 20px;
 	height: 28px;
 	padding: 5px;
@@ -139,3 +139,6 @@ h1 {
 	color: #000;
 }
 
+.sidebuttons {
+	width: 40px;
+}

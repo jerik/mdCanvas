@@ -6,6 +6,8 @@
 
 	<title>Grid / mdCanvas</title>
 	<link rel="stylesheet" href="module.css">
+	<!-- @todo local einbindne -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="js/systemjs/dist/system.js"></script>
 	<!-- @todo how to get this script line in SystemJS.import()? -->
   	<script src="https://cdn.rawgit.com/showdownjs/showdown/1.4.2/dist/showdown.min.js"></script>
@@ -32,8 +34,13 @@
 <body>
   <!-- @todo sidebar must be one whole column on the right side -->
   <div id="sidebar">
-	  <button id="takephoto">Camera</button>
-  	  <a id="toggler" onclick=" ">&raquo;</a>
+	  <button id="takephoto" class="sidebuttons">
+	  	<i class="fa fa-camera" aria-hidden="true"></i>
+	  </button>
+	  <button id="toggler" class="sidebuttons">
+	  	<i class="fa fa-bars" aria-hidden="true"></i>
+	  </button>
+  	  <!--a id="toggler" onclick=" ">&raquo;</a-->
 	  <ul id="link" style="display:none"></ul>
   </div>
   <div id="canvasbox">
@@ -64,8 +71,8 @@
 			let canvasbox = $("#canvasbox");
 			html2canvas(canvasbox).then(function(canvas) {
 				let printWindow = window.open();
-				let img = canvas.toDataURL("image/png");
-				//let url = canvas.toDataURL();
+				//let img = canvas.toDataURL("image/png");
+				let url = canvas.toDataURL();
 				printWindow.document.write('<html><style type="text/css" media="print">button {display:none; }</style><body><img src="' + url + '" ><button onclick="window.print()" style="margin-right:100px">print</button><span>Powered by <a href="https://github.com/jerik/mdCanvas">mdCanvas</a></span></body></html>');
 				//printWindow.document.body.appendChild(canvas);
 			});
