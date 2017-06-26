@@ -73,7 +73,7 @@
 				let printWindow = window.open();
 				//let img = canvas.toDataURL("image/png");
 				let url = canvas.toDataURL();
-				printWindow.document.write('<html><style type="text/css" media="print">button {display:none; }</style><body><img src="' + url + '" ><button onclick="window.print()" style="margin-right:100px">print</button><span>Powered by <a href="https://github.com/jerik/mdCanvas">mdCanvas</a></span></body></html>');
+				printWindow.document.write('<html><head><style type="text/css" media="print">button {display:none; }</style><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></head><body><button onclick="window.print()"><i class="fa fa-print" aria-hidden="true" class="sidebuttons"></i></button><img src="' + url + '" ><span>Powered by <a href="https://github.com/jerik/mdCanvas">mdCanvas</a></span></body></html>');
 				//printWindow.document.body.appendChild(canvas);
 			});
 		});
