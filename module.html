@@ -7,12 +7,13 @@
 	<title>Grid / mdCanvas</title>
 	<link rel="stylesheet" href="module.css">
 	<!-- @todo local einbindne -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="js/jquery/jquery-3.2.1.min.js"></script>
 	<script src="js/systemjs/dist/system.js"></script>
 	<!-- @todo how to get this script line in SystemJS.import()? -->
-  	<script src="https://cdn.rawgit.com/showdownjs/showdown/1.4.2/dist/showdown.min.js"></script>
+  	<script src="js/showdown/showdown.min.js"></script>
 	<script>
-		SystemJS.import('https://code.jquery.com/jquery.js');
+		/* SystemJS.import('js/jquery/jquery-3.2.1.min.js'); */
   		/* SystemJS.import('https://cdn.rawgit.com/showdownjs/showdown/1.4.2/dist/showdown.min.js'); */ // @todo how to integrate this correctly and avoid the script tag?
 
 		SystemJS.config({
@@ -62,7 +63,7 @@
   
   <!-- @todo load html2canvas with SzstemJS, create a button to take the screenshot, and save it somewhere for download or print -->
   <!-- @todo jquery is two time loaded, reduce this to one time -->
-  <script src="https://code.jquery.com/jquery.js"></script>
+  <!-- script src="js/jquery/jquery-3.2.1.min.js"></script -->
   <script type="text/javascript" src="./js/html2canvas/html2canvas.js"></script>
   <script type="text/javascript">
 	/* @todo open up png as print dialog, or save as pdf */
@@ -73,7 +74,7 @@
 				let printWindow = window.open();
 				//let img = canvas.toDataURL("image/png");
 				let url = canvas.toDataURL();
-				printWindow.document.write('<html><head><style type="text/css" media="print">button {display:none; }</style><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></head><body><button onclick="window.print()"><i class="fa fa-print" aria-hidden="true" class="sidebuttons"></i></button><img src="' + url + '" ><span>Powered by <a href="https://github.com/jerik/mdCanvas">mdCanvas</a></span></body></html>');
+				printWindow.document.write('<html><head><style type="text/css" media="print">button {display:none; }</style><link rel="stylesheet" href="css/font-awesome.min.css"></head><body><button onclick="window.location.reload(); window.print()"><i class="fa fa-print" aria-hidden="true" class="sidebuttons"></i></button><img src="' + url + '" ><span>Powered by <a href="https://github.com/jerik/mdCanvas">mdCanvas</a></span></body></html>');
 				//printWindow.document.body.appendChild(canvas);
 			});
 		});
