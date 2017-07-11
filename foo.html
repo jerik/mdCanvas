@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>	
 	<head>
+	<meta charset="utf-8">
 	<title>bar test</title>
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script>
@@ -11,6 +13,8 @@
 			// Based on https://stackoverflow.com/questions/35135110/jquery-ajax-with-es6-promises
 			// and http://www.sohamkamani.com/blog/2016/08/28/incremenal-tutorial-to-promises/
 			function ajax( options ) { 
+				// ajaxSetup eingefuegt fuer verarbeitung ohne shttp sondern via file://
+				$.ajaxSetup({ dataType: 'text'});
 				return new Promise( function( resolve, reject ) { 
 					$.get( options ).done( resolve ).fail( reject );
 				});

@@ -54,7 +54,7 @@ export class main {
 			).catch( function( error ) { 
 				console.error( "Catched: ", error )
 			} );
-}
+	}
 
 	getUrlParams( url ) {  // parameter is for testing purpose
 		// if url contains only "bar=foo&this=that", the follwing sliece does work and seams to return the untouched url. Thats ok for now.
