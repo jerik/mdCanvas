@@ -35,6 +35,9 @@
 <body>
   <!-- @todo sidebar must be one whole column on the right side -->
   <div id="sidebar">
+	  <button id="takephoto" class="sidebuttons">
+	  	<i class="fa fa-camera" aria-hidden="true"></i>
+	  </button>
 	  <button id="toggler" class="sidebuttons">
 	  	<i class="fa fa-bars" aria-hidden="true"></i>
 	  </button>
@@ -62,5 +65,19 @@
   <!-- @todo jquery is two time loaded, reduce this to one time -->
   <!-- script src="js/jquery/jquery-3.2.1.min.js"></script -->
   <script type="text/javascript" src="./js/html2canvas/html2canvas.js"></script>
+  <script type="text/javascript">
+	/* @todo open up png as print dialog, or save as pdf */
+		$(document).on('click', '#takephoto', function() {
+			//let canvasbox = document.getElementById("canvasbox");
+			let canvasbox = $("#canvasbox");
+			html2canvas(canvasbox).then(function(canvas) {
+				let printWindow = window.open();
+				//let img = canvas.toDataURL("image/png");
+				let url = canvas.toDataURL();
+				printWindow.document.write('<html><head><style type="text/css" media="print">button {display:none; }</style><link rel="stylesheet" href="css/font-awesome.min.css"></head><body><button onclick="window.location.reload(); window.print()"><i class="fa fa-print" aria-hidden="true" class="sidebuttons"></i></button><img src="' + url + '" ><span>Powered by <a href="https://github.com/jerik/mdCanvas">mdCanvas</a></span></body></html>');
+				//printWindow.document.body.appendChild(canvas);
+			});
+		});
+  </script>
 </body>
 </html>
