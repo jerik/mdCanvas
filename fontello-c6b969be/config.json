@@ -1,0 +1,28 @@
+{
+  "name": "",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "7277ded7695b2a307a5f9d50097bb64c",
+      "css": "print",
+      "code": 59392,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "559647a6f430b3aeadbecd67194451dd",
+      "css": "menu",
+      "code": 61641,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "dc3f1d5b1d006f7f7b3b6295eccab9da",
+      "css": "camera",
+      "code": 59393,
+      "src": "fontawesome"
+    }
+  ]
+}

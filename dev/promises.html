@@ -10,6 +10,7 @@ window.onload = function() {
 
 	// var url = "http://www.google.com"; // throws an error
 	var url = "test.html"; // works
+	var url = "bar.txt"; // works
 
 	/*
 	 * Chapter 2
@@ -56,6 +57,8 @@ window.onload = function() {
 	*/
 
 	function ajax( options ) { 
+		// ajaxSetup eingefuegt fuer verarbeitung ohne shttp sondern via file://
+		$.ajaxSetup({ dataType: 'text'});
 		return new Promise( function( resolve, reject ) { 
 			$.get( options ).done( resolve ).fail( reject );
 		});
