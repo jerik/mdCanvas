@@ -14,10 +14,21 @@ export class sidebar {
 	}
 
 	checkForMdFiles() {
-		//let url = window.location.href;
+		let url = window.location.href;
 		//let path = window.location.pathname;
-		//console.log(url, path)
-		this.checkForFilesShttp();
+		console.warn(url.substr(0,4));
+		// if file is served via http(s):// (shttp)
+		if (url.substr(0,4) == 'http') {
+			this.checkForFilesShttp();
+		} else {
+		// if file is served via file:// - local
+			this.checkForFilesFile();
+		}
+	}
+
+	checkForFilesFile() {
+		var filenames = g_FOLDER_CONTENTS.match(/\S+/g);
+		this.populateSidebar(this.cleanFiles(filenames));
 	}
 
 	checkForFilesShttp() {
@@ -43,7 +54,7 @@ export class sidebar {
 			// clean array that it only has relevant mdfiles 
 			this.mdfiles = this.cleanFiles(this.mdfiles);
 			this.remove(this.mdfiles);
-			console.log(this.mdfiles);
+			//console.log(this.mdfiles);
 			return this.mdfiles; // for the next promise, if there is one
 		}
 
@@ -52,7 +63,7 @@ export class sidebar {
 		}
 
 		var doReject = function( data ) { 
-			console.log( "Reject: ", data );
+			console.warn( "Reject: ", data );
 		}
 
 		this.ajax( "." )
@@ -71,7 +82,7 @@ export class sidebar {
 	populateSidebar(mdfiles) {
 		// console.log( "lets do the", mdfiles);
 		$.each( mdfiles, function( key, value ) { 
-			console.log( value );
+			//console.log( value );
 			var li = $( '<li>' ).appendTo( '#link' );
 			var name = value.slice( 0,-3 );
 			// $( '<a>', { text: value, href: '?md=' + value.slice( 0,-3 ) } ).appendTo( '#link' );
@@ -138,11 +149,11 @@ export class sidebar {
 					localStorage.removeItem( 'stateSidebar' ); // value is null
 				}
 
-				console.log("sidebar state is now", setState);
+				//console.log("sidebar state is now", setState);
 			}, 
 			
 			getState: function(  ) {
-				console.log("current state is now", localStorage.getItem('stateSidebar'));
+				//console.log("current state is now", localStorage.getItem('stateSidebar'));
 				return localStorage.getItem( 'stateSidebar' );
 		    },
 
