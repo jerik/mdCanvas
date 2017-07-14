@@ -16,7 +16,7 @@ export class sidebar {
 	checkForMdFiles() {
 		let url = window.location.href;
 		//let path = window.location.pathname;
-		console.warn(url.substr(0,4));
+		console.log(url.substr(0,4));
 		// if file is served via http(s):// (shttp)
 		if (url.substr(0,4) == 'http') {
 			this.checkForFilesShttp();
