@@ -165,6 +165,9 @@ export class main {
 		console.log('show', this.canvas);
 		let canvas = this.canvas;
 
+		// default is to hidde todo box
+		let hideTodo = true;
+
 		// https://stackoverflow.com/a/29933940/1933185
 		// Object.keys(canvas).forEach(function(key) {
 		Object.keys(canvas).forEach((key) => { 
@@ -173,14 +176,26 @@ export class main {
 				$('#hypothesis').html(canvas[key].hypothesis);
 			} else {
 				let box = canvas[key];
-				let tagid = '#mdc-' + canvas[key].name.toLowerCase();
+				let boxname = canvas[key].name.toLowerCase();
+				let tagid = '#mdc-' + boxname;
 				//console.log(tagid);
 				var sdown = new showdown.Converter(  ), text = box.content, html = sdown.makeHtml( text );
 				$(tagid).html(html);
 				//$(tagid).html(box.content);
+
+				// show todobox if available in md file
+				if (boxname == 'todo') {
+					$(tagid).css('display', 'inline');
+				}
+
 			}
 			console.log(key, canvas[key]);
 		}) 
+
+		// hide todo-box
+		if (hideTodo) {
+			$('#mdc-todo')
+		}
 	}
 
 }

@@ -39,7 +39,10 @@ h1 {
 #mdc-customer-segment { border:1px solid black;}
 #mdc-cost-structure { border:1px solid black;}
 #mdc-revenue-stream { border:1px solid black;}
-#mdc-todo { border:1px solid black;}
+#mdc-todo { 
+	border:1px solid black;
+	display: none;
+}
 
 .box { 
 	min-height: 120px;
