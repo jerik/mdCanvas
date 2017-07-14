@@ -16,6 +16,7 @@ export class main {
 		var filename = this.getFilenameFrom( url );
 
 		var mdPath = filename + '.md';
+		console.log("Using md file:", mdPath);
 
 		// resolve function 
 		var doParse = ( data ) => { 
@@ -89,6 +90,8 @@ export class main {
 	
 	// try promises from foo.html
 	ajax( options ) { 
+		// ajaxSetup eingefuegt fuer verarbeitung ohne shttp sondern via file://
+		$.ajaxSetup({ dataType: 'text'});
 		return new Promise( function( resolve, reject ) { 
 			$.get( options ).done( resolve ).fail( reject );
 		});
