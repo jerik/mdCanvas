@@ -63,6 +63,7 @@ If you add a todo section in your markdown textfile it will show up under the ca
 URL: `/path/to/your/mdCanvas.html?md=project`
 
 ## Todos
+- Use of easy webserver, like https://github.com/cortesi/devd
 - Make the todo section disapear when clicking on the headline. So that the canvas can be printed without todolist.
 - Add Colors. Automatic highlights of pairs. 
 - Link list has problems with filenames including spaces. They should be removed from list. Perhaps with Error-Message
