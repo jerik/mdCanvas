@@ -93,6 +93,18 @@ h1, h2 {
   margin: 0;
 }
 
+/* Todo Bereich */
+#todo-container {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background: #fafafa;
+}
+#todo-container h2 {
+  margin: 0 0 10px 0;
+  cursor: pointer;
+}
+
 /* Print Styles: DIN A4 im Querformat */
 @page {
   size: A4 landscape;

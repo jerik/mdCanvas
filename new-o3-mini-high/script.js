@@ -9,7 +9,8 @@ const sectionMapping = {
   "Channels": "channels",
   "Customer Segment": "customer-segment",
   "Cost Structure": "cost-structure",
-  "Revenue Streams": "revenue-streams"
+  "Revenue Streams": "revenue-streams",
+  "Todo": "todo"
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -45,20 +46,23 @@ function parseMarkdown(mdText) {
       const header = line.replace("# ", "").trim();
       if (sectionMapping.hasOwnProperty(header)) {
         currentSection = sectionMapping[header];
-        // Lean Canvas als Fließtext, ansonsten Array für Listeneinträge
+        // Bei "lean-canvas" als Fließtext, sonst Array für Listeneinträge
         sectionContent[currentSection] = (currentSection === "lean-canvas") ? "" : [];
       } else {
         currentSection = null;
       }
     } else if (currentSection) {
-      if (currentSection === "lean-canvas") {
-        // Fließtext sammeln
-        if (line !== "") {
+      // Sammle Fließtext, falls keine Listeneinträge vorhanden sind
+      if (line !== "") {
+        if (currentSection === "lean-canvas") {
+          sectionContent[currentSection] += line + " ";
+        } else if (line.startsWith("- ")) {
+          const item = line.replace("- ", "").trim();
+          sectionContent[currentSection].push(item);
+        } else {
+          // Zeilen, die nicht mit "- " beginnen, ebenfalls als Fließtext anhängen
           sectionContent[currentSection] += line + " ";
         }
-      } else if (line.startsWith("- ")) {
-        const item = line.replace("- ", "").trim();
-        sectionContent[currentSection].push(item);
       }
     }
   });
@@ -71,20 +75,66 @@ function parseMarkdown(mdText) {
       const leanText = sectionContent[section].trim();
       const newHeaderText = leanText ? `Lean Canvas - ${leanText}` : "Lean Canvas";
       leanHeader.textContent = newHeaderText;
-      // Auch als Seitentitel setzen
       document.title = newHeaderText;
+    } else if (section === "todo") {
+      // Todo wird separat verarbeitet (siehe unten)
+      continue;
     } else {
       const container = document.querySelector(`#${section} .content`);
       if (container) {
-        const ul = document.createElement("ul");
-        sectionContent[section].forEach(item => {
-          const li = document.createElement("li");
-          li.textContent = item;
-          ul.appendChild(li);
-        });
-        container.appendChild(ul);
+        // Prüfen, ob der Inhalt als Array (Listeneinträge) vorliegt oder als Fließtext
+        if (Array.isArray(sectionContent[section]) && sectionContent[section].length) {
+          const ul = document.createElement("ul");
+          sectionContent[section].forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            ul.appendChild(li);
+          });
+          container.appendChild(ul);
+        } else {
+          container.textContent = sectionContent[section].trim();
+        }
       }
     }
+  }
+
+  // Todo-Bereich erstellen, falls die Markdown-Sektion vorhanden ist
+  if (sectionContent.hasOwnProperty("todo") && sectionContent["todo"]) {
+    const todoData = sectionContent["todo"];
+    // Erstelle Container
+    const todoContainer = document.createElement("div");
+    todoContainer.id = "todo-container";
+    // Überschrift mit Toggle-Funktionalität
+    const todoHeader = document.createElement("h2");
+    todoHeader.textContent = "Todo";
+    todoHeader.addEventListener("click", () => {
+      // Toggle Anzeige des Inhalts
+      const currentDisplay = todoContent.style.display;
+      todoContent.style.display = (currentDisplay === "none") ? "" : "none";
+    });
+    // Inhalt
+    const todoContent = document.createElement("div");
+    todoContent.classList.add("todo-content");
+    // Wenn als Array (Liste) vorliegend, als Liste anzeigen, sonst als Fließtext
+    if (Array.isArray(todoData) && todoData.length) {
+      const ul = document.createElement("ul");
+      todoData.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+      });
+      todoContent.appendChild(ul);
+    } else {
+      todoContent.textContent = todoData.trim();
+    }
+    // Standardmäßig sichtbar (Default)
+    todoContent.style.display = "";
+    
+    // Zusammenbauen und unterhalb der Canvas einfügen
+    todoContainer.appendChild(todoHeader);
+    todoContainer.appendChild(todoContent);
+    const canvas = document.querySelector(".canvas");
+    canvas.parentNode.insertBefore(todoContainer, canvas.nextSibling);
   }
 }
 

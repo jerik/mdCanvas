@@ -1,5 +1,5 @@
 # Lean Canvas
-Projekt Helsinki
+Foobar
 
 # Problem
 - Beispielinhalt Problem 1
@@ -36,4 +36,8 @@ Projekt Helsinki
 # Revenue Streams
 - Beispielinhalt Einnahmequelle 1
 - Beispielinhalt Einnahmequelle 2
+
+# Todo
+- will only be visible if todo section exists
+- Todo Eintrag 2
 
