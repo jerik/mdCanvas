@@ -6,19 +6,25 @@ body {
   background: #f5f5f5;
 }
 
-h2 {
+h1, h2 {
   margin-top: 0;
 }
 
-/* Grid-Layout für das Business Model Canvas */
+/* Lean Canvas Header */
+#lean-canvas-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Grid-Layout für den Lean Canvas */
 .canvas {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: auto auto auto;
   grid-gap: 10px;
   grid-template-areas:
-    "key-part key-activities value-proposition customer-relationships customer-segments"
-    "key-part key-resources value-proposition channels customer-segments"
+    "problem solution unique-value-proposition unfair-advantage customer-segment"
+    "problem key-metrics unique-value-proposition channels customer-segment"
     "cost-structure cost-structure cost-structure revenue-streams revenue-streams";
   background: #fff;
   padding: 10px;
@@ -26,28 +32,28 @@ h2 {
 }
 
 /* Positionierung der einzelnen Bereiche */
-#key-part {
-  grid-area: key-part;
+#problem {
+  grid-area: problem;
 }
 
-#key-activities {
-  grid-area: key-activities;
+#solution {
+  grid-area: solution;
 }
 
-#value-proposition {
-  grid-area: value-proposition;
+#unique-value-proposition {
+  grid-area: unique-value-proposition;
 }
 
-#customer-relationships {
-  grid-area: customer-relationships;
+#unfair-advantage {
+  grid-area: unfair-advantage;
 }
 
-#customer-segments {
-  grid-area: customer-segments;
+#customer-segment {
+  grid-area: customer-segment;
 }
 
-#key-resources {
-  grid-area: key-resources;
+#key-metrics {
+  grid-area: key-metrics;
 }
 
 #channels {
@@ -62,7 +68,7 @@ h2 {
   grid-area: revenue-streams;
 }
 
-/* Optional: Stil für die Inhalte */
+/* Stil für die Inhalte */
 .canvas-item {
   border: 1px solid #ccc;
   padding: 10px;

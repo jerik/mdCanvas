@@ -1,12 +1,13 @@
 // Mapping von Markdown-Überschriften zu den Container-IDs
 const sectionMapping = {
-  "Key Partners": "key-part",
-  "Key Activities": "key-activities",
-  "Key Resources": "key-resources",
-  "Value Proposition": "value-proposition",
-  "Customer Relationships": "customer-relationships",
+  "Lean Canvas": "lean-canvas",
+  "Problem": "problem",
+  "Solution": "solution",
+  "Key Metrics": "key-metrics",
+  "Unique Value Proposition": "unique-value-proposition",
+  "Unfair Advantage": "unfair-advantage",
   "Channels": "channels",
-  "Customer Segments": "customer-segments",
+  "Customer Segment": "customer-segment",
   "Cost Structure": "cost-structure",
   "Revenue Streams": "revenue-streams"
 };
@@ -26,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function parseMarkdown(mdText) {
-  // Aufteilen in Zeilen
   const lines = mdText.split('\n');
   let currentSection = null;
   const sectionContent = {};
@@ -36,33 +36,45 @@ function parseMarkdown(mdText) {
     if (line.startsWith("# ")) {
       // Neue Überschrift
       const header = line.replace("# ", "").trim();
-      // Prüfen, ob Header in der Mapping vorhanden ist
       if (sectionMapping.hasOwnProperty(header)) {
         currentSection = sectionMapping[header];
-        // Initialisiere Inhalt als Array
-        sectionContent[currentSection] = [];
+        // Für "lean-canvas" als Text, ansonsten Array für Listen
+        sectionContent[currentSection] = (currentSection === "lean-canvas") ? "" : [];
       } else {
         currentSection = null;
       }
-    } else if (line.startsWith("- ") && currentSection) {
-      // Listeneintrag, als HTML <li> umwandeln
-      const item = line.replace("- ", "").trim();
-      sectionContent[currentSection].push(item);
+    } else if (currentSection) {
+      if (currentSection === "lean-canvas") {
+        // Bei lean-canvas wird der Fließtext gesammelt
+        if (line !== "") {
+          sectionContent[currentSection] += line + " ";
+        }
+      } else if (line.startsWith("- ")) {
+        const item = line.replace("- ", "").trim();
+        sectionContent[currentSection].push(item);
+      }
     }
   });
 
   // Inhalte in die entsprechenden Container einfügen
   for (const section in sectionContent) {
-    const container = document.querySelector(`#${section} .content`);
-    if (container) {
-      // Erstelle eine Liste
-      const ul = document.createElement("ul");
-      sectionContent[section].forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        ul.appendChild(li);
-      });
-      container.appendChild(ul);
+    if (section === "lean-canvas") {
+      // Fülle den Lean Canvas Header
+      const headerContainer = document.querySelector("#lean-canvas-header .lean-content");
+      if (headerContainer) {
+        headerContainer.textContent = sectionContent[section].trim();
+      }
+    } else {
+      const container = document.querySelector(`#${section} .content`);
+      if (container) {
+        const ul = document.createElement("ul");
+        sectionContent[section].forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          ul.appendChild(li);
+        });
+        container.appendChild(ul);
+      }
     }
   }
 }

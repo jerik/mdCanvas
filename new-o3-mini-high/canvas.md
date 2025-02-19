@@ -1,28 +1,31 @@
-# Key Partners
-- Beispielinhalt Partner 1
-- Beispielinhalt Partner 2
+# Lean Canvas
+Projekt Helsinki
 
-# Key Activities
-- Beispielinhalt Aktivität 1
-- Beispielinhalt Aktivität 2
+# Problem
+- Beispielinhalt Problem 1
+- Beispielinhalt Problem 2
 
-# Key Resources
-- Beispielinhalt Ressource 1
-- Beispielinhalt Ressource 2
+# Solution
+- Beispielinhalt Lösung 1
+- Beispielinhalt Lösung 2
 
-# Value Proposition
+# Key Metrics
+- Beispielinhalt Metrik 1
+- Beispielinhalt Metrik 2
+
+# Unique Value Proposition
 - Beispielinhalt Vorteil 1
 - Beispielinhalt Vorteil 2
 
-# Customer Relationships
-- Beispielinhalt Beziehung 1
-- Beispielinhalt Beziehung 2
+# Unfair Advantage
+- Beispielinhalt Vorteilhaft 1
+- Beispielinhalt Vorteilhaft 2
 
 # Channels
 - Beispielinhalt Kanal 1
 - Beispielinhalt Kanal 2
 
-# Customer Segments
+# Customer Segment
 - Beispielinhalt Segment 1
 - Beispielinhalt Segment 2
 
