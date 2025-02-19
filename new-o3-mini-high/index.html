@@ -3,17 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Der Title wird später dynamisch angepasst -->
+  <!-- Der Title wird dynamisch angepasst -->
   <title>Lean Canvas</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header: Lean Canvas Überschrift inklusive Markdown-Inhalt -->
+  <!-- PDF Export Button -->
+  <div id="export-container">
+    <button id="exportPDF">PDF Export</button>
+  </div>
+  
+  <!-- Header: Lean Canvas Überschrift inklusive dynamisch integrierten Markdown-Inhalt -->
   <header id="lean-canvas-header">
     <h1>Lean Canvas</h1>
   </header>
 
-  <!-- Grid-Layout für den Canvas -->
+  <!-- Grid-Layout für den Lean Canvas -->
   <div class="canvas">
     <div id="problem" class="canvas-item">
       <h2>Problem</h2>

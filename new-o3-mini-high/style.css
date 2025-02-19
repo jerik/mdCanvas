@@ -10,6 +10,18 @@ h1, h2 {
   margin-top: 0;
 }
 
+/* Export Button */
+#export-container {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+#exportPDF {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 /* Header für Lean Canvas */
 #lean-canvas-header {
   margin-bottom: 20px;
@@ -79,5 +91,26 @@ h1, h2 {
 .content ul {
   padding-left: 20px;
   margin: 0;
+}
+
+/* Print Styles: DIN A4 im Querformat */
+@page {
+  size: A4 landscape;
+  margin: 10mm;
+}
+
+@media print {
+  body {
+    background: none;
+    padding: 0;
+  }
+  #export-container, header {
+    display: none;
+  }
+  .canvas {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
 }
 

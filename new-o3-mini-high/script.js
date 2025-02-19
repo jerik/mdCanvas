@@ -13,6 +13,13 @@ const sectionMapping = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  // PDF Export Button
+  const exportBtn = document.getElementById("exportPDF");
+  exportBtn.addEventListener("click", () => {
+    window.print();
+  });
+
+  // Markdown laden und parsen
   fetch('canvas.md')
     .then(response => {
       if (!response.ok) {
