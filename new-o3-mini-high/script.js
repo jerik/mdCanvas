@@ -38,14 +38,14 @@ function parseMarkdown(mdText) {
       const header = line.replace("# ", "").trim();
       if (sectionMapping.hasOwnProperty(header)) {
         currentSection = sectionMapping[header];
-        // Für "lean-canvas" als Text, ansonsten Array für Listen
+        // Lean Canvas als Fließtext, ansonsten Array für Listeneinträge
         sectionContent[currentSection] = (currentSection === "lean-canvas") ? "" : [];
       } else {
         currentSection = null;
       }
     } else if (currentSection) {
       if (currentSection === "lean-canvas") {
-        // Bei lean-canvas wird der Fließtext gesammelt
+        // Fließtext sammeln
         if (line !== "") {
           sectionContent[currentSection] += line + " ";
         }
@@ -59,11 +59,13 @@ function parseMarkdown(mdText) {
   // Inhalte in die entsprechenden Container einfügen
   for (const section in sectionContent) {
     if (section === "lean-canvas") {
-      // Fülle den Lean Canvas Header
-      const headerContainer = document.querySelector("#lean-canvas-header .lean-content");
-      if (headerContainer) {
-        headerContainer.textContent = sectionContent[section].trim();
-      }
+      // Header aktualisieren: Integriere den Lean Canvas Text in den Überschriftentext
+      const leanHeader = document.querySelector("#lean-canvas-header h1");
+      const leanText = sectionContent[section].trim();
+      const newHeaderText = leanText ? `Lean Canvas - ${leanText}` : "Lean Canvas";
+      leanHeader.textContent = newHeaderText;
+      // Auch als Seitentitel setzen
+      document.title = newHeaderText;
     } else {
       const container = document.querySelector(`#${section} .content`);
       if (container) {
