@@ -1,0 +1,77 @@
+/* Grundstyles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f5f5f5;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+/* Grid-Layout für das Business Model Canvas */
+.canvas {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto auto auto;
+  grid-gap: 10px;
+  grid-template-areas:
+    "key-part key-activities value-proposition customer-relationships customer-segments"
+    "key-part key-resources value-proposition channels customer-segments"
+    "cost-structure cost-structure cost-structure revenue-streams revenue-streams";
+  background: #fff;
+  padding: 10px;
+  border: 2px solid #333;
+}
+
+/* Positionierung der einzelnen Bereiche */
+#key-part {
+  grid-area: key-part;
+}
+
+#key-activities {
+  grid-area: key-activities;
+}
+
+#value-proposition {
+  grid-area: value-proposition;
+}
+
+#customer-relationships {
+  grid-area: customer-relationships;
+}
+
+#customer-segments {
+  grid-area: customer-segments;
+}
+
+#key-resources {
+  grid-area: key-resources;
+}
+
+#channels {
+  grid-area: channels;
+}
+
+#cost-structure {
+  grid-area: cost-structure;
+}
+
+#revenue-streams {
+  grid-area: revenue-streams;
+}
+
+/* Optional: Stil für die Inhalte */
+.canvas-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background: #fafafa;
+  overflow: auto;
+}
+
+.content ul {
+  padding-left: 20px;
+  margin: 0;
+}
+

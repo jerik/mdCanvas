@@ -1,0 +1,17 @@
+-----------------------------------------------------
+| K-Part | K-Act      | V-Prop | C-Relation | C-Seg |
+|        |------------|        |------------|       |
+|        | K-Resource |        | Channels   |       |
+|---------------------------------------------------|
+| Cost Structure          | Revenue Streams         |
+-----------------------------------------------------
+
+
+Legende: 
+K-Part = Key Partners
+K-Act = Key Activities
+C-Relatin = customer Relationships
+V-Prop = Value Propsitions
+C-Seg = Customer Segments
+K-Resouce = Key Resources
+
