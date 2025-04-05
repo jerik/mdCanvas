@@ -52,15 +52,15 @@ function parseMarkdown(mdText) {
         currentSection = null;
       }
     } else if (currentSection) {
-      // Sammle Fließtext, falls keine Listeneinträge vorhanden sind
       if (line !== "") {
         if (currentSection === "lean-canvas") {
           sectionContent[currentSection] += line + " ";
-        } else if (line.startsWith("- ")) {
-          const item = line.replace("- ", "").trim();
+        } else if (/^[-*]\s/.test(line)) {
+          // Erkenne sowohl Bindestrich als auch Stern als Listeneintrag
+          const item = line.replace(/^[-*]\s/, "").trim();
           sectionContent[currentSection].push(item);
         } else {
-          // Zeilen, die nicht mit "- " beginnen, ebenfalls als Fließtext anhängen
+          // Andere Zeilen als Fließtext anhängen
           sectionContent[currentSection] += line + " ";
         }
       }
