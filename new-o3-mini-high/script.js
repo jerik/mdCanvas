@@ -55,12 +55,11 @@ function parseMarkdown(mdText) {
       if (line !== "") {
         if (currentSection === "lean-canvas") {
           sectionContent[currentSection] += line + " ";
-        } else if (/^[-*]\s/.test(line)) {
-          // Erkenne sowohl Bindestrich als auch Stern als Listeneintrag
-          const item = line.replace(/^[-*]\s/, "").trim();
+        } else if (/^[-*]\s+/.test(line)) {  // geänderte Regex: Erlaubt mehrere Leerzeichen
+          const item = line.replace(/^[-*]\s+/, "").trim();
           sectionContent[currentSection].push(item);
         } else {
-          // Andere Zeilen als Fließtext anhängen
+          // Zeilen, die nicht als Listenpunkt erkannt werden, als Fließtext anhängen
           sectionContent[currentSection] += line + " ";
         }
       }
