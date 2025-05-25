@@ -1,4 +1,4 @@
-# Canvas
+# Lean Canvas
 “Make Love, Not War”
 
 # Problem
