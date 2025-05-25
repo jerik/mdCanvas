@@ -27,9 +27,16 @@ Create a markdown textfile `project.md` in the same directory as the `mdCanvas.h
 	# Problem
 	1. How to save the earth
 
+	# Alternative
+	1. Green-washing
+
 	# Customer-segment
 	1. All people of the world
 	1. Wildlife
+
+	# Early-adopters
+	- Family and friends
+	- Green people
 
 	# Unique-Value-Proposition
 	The time is **not in love** with us

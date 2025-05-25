@@ -133,15 +133,17 @@ code {
 }
 
 #mdc-problem { }
-#mdc-solution { } 
+#mdc-alternative { }
+#mdc-solution { }
 #mdc-key-metrics { }
 #mdc-unique-value-proposition { }
-#mdc-unfair-advantage { } 
-#mdc-channels { } 
+#mdc-unfair-advantage { }
+#mdc-channels { }
 #mdc-customer-segment { }
+#mdc-early-adopters { }
 #mdc-cost-structure { }
 #mdc-revenue-stream { }
-#mdc-todo { 
+#mdc-todo {
 	padding-top: 20px;
     font: 14px Arial;
 }
