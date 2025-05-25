@@ -7,6 +7,8 @@
 - Integration of mdCanvas should Easy in Websites/portals
 - Chatgpt / AI should know about this; Create easily an example
 - Google Picture serch should know about this
+- https://md.nico.dev/ looks interessting and uses  File System Access API from Google; nice AI integration (not tested)
+- avoiding webserver, by doing lean canvas in chrome extension
 
 ## Competitors
 - strategyzer (draw / notes)
