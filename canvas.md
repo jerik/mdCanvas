@@ -1,43 +1,71 @@
-# Lean Canvas
-Foobar
+# Canvas
+“Make Love, Not War”
 
 # Problem
-- Beispielinhalt Problem 1
-- Beispielinhalt Problem 2
+- There’s too much war in the world. Still. In 2025.  
+- Trillions spent on tanks, drones, and PR campaigns to sell both.  
+- Politicians keep confusing “defense” with “offense.”  
+- Peace is considered unprofitable and therefore... impractical.  
+- People are dying, but markets are growing – so all good?
 
 # Solution
-- Beispielinhalt Lösung 1
-- Beispielinhalt Lösung 2
+- **Make Love, Not War™** A radically naive, disturbingly hopeful global movement offering a bold alternative to war: emotional intelligence, mutual respect, and occasionally, consensual affection.  Instead of invading countries, we propose invading hearts.
+- **Features include:**
+- Conflict resolution via dance battles  
+- Diplomacy speed-dating for world leaders  
+- Free hugs for former arms dealers  
+- Emotional literacy for heads of state
 
 # Key Metrics
-- Beispielinhalt Metrik 1
-- Beispielinhalt Metrik 2
+- Number of dictators replaced by therapists  
+- Tanks melted and repurposed as playground slides  
+- Decline in global defense budgets  
+- Uptick in global oxytocin levels  
+- Daily average of “I love you”s per capita
 
 # Unique Value Proposition
-- Beispielinhalt Vorteil 1
-- Beispielinhalt Vorteil 2
+“Because launching missiles is easier than meaningful conversation – but we believe in difficult things.”
+
+We’re the only peace movement brave enough to say:  
+**Maybe try not bombing each other. Just once. See what happens.**
 
 # Unfair Advantage
-- Beispielinhalt Vorteilhaft 1
-- Beispielinhalt Vorteilhaft 2
+- Zero lobbying influence = zero moral compromise  
+- Backed by grandmas, poets, and disillusioned UN interns  
+- Immune to sanctions – we have no assets  
+- Weaponized idealism with nuclear-level sincerity
 
 # Channels
-- Beispielinhalt Kanal 1
-- Beispielinhalt Kanal 2
+- Whispered in yoga studios and shouted on protest signs  
+- Graffiti on the walls of heavily guarded embassies  
+- Accidentally trending on TikTok  
+- Smuggled into G7 meetings via awkward questions
+
+---
 
 # Customer Segment
-- Beispielinhalt Segment 1
-- Beispielinhalt Segment 2
+- Disenchanted citizens of every nation  
+- Soldiers tired of being pawns  
+- Young people who’d rather fall in love than in line  
+- Old revolutionaries with bad knees and great stories  
+- Secret pacifists working in arms corporations
 
 # Cost Structure
-- Beispielinhalt Kostenpunkt 1
-- Beispielinhalt Kostenpunkt 2
+- Printing love manifestos on recycled military propaganda  
+- Hosting “Make Out, Not Black Out” peace parties  
+- Bribing world leaders with baked goods and therapy vouchers  
+- Legal fees for public acts of compassion
 
 # Revenue Streams
-- Beispielinhalt Einnahmequelle 1
-- Beispielinhalt Einnahmequelle 2
+- Selling ironic anti-war merchandise: “Peace is Profitable” mugs  
+- Patreon donations from enlightened cynics  
+- Anonymous crypto from someone inside NATO  
+- Licensing the concept of “not killing each other” (open source)
 
 # Todo
-- will only be visible if todo section exists
-- Todo Eintrag 2
+- Hug a politician (ask first)  
+- Replace war rooms with cuddle rooms  
+- Translate "Make Love Not War" into every language, including binary  
+- Turn defense contractors into relationship counselors  
+- Remind the world: peace was always an option
 
