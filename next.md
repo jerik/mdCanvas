@@ -15,8 +15,3 @@
 - canvanizer (notes)
 - visual-paradigm.com (notes)
 - concept-board
-
-## Spreading
-- Blogger / Youtubers
-- Forums / Websites 
-
